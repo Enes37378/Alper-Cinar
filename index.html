@@ -94,73 +94,66 @@
             margin-right: auto;
         }
 
-        .qr-grid {
+        .image-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
             margin-top: 30px;
         }
 
-        .qr-item {
-            background: rgba(40, 40, 40, 0.8);
-            border-radius: 15px;
-            padding: 15px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            transition: all 0.4s ease;
-            text-align: center;
+        .image-item {
             position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(60, 60, 60, 0.5);
             cursor: pointer;
-        }
-
-        .qr-item:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4), 0 0 20px rgba(100, 150, 255, 0.3);
-            border-color: rgba(100, 150, 255, 0.6);
-        }
-
-        .qr-code {
-            width: 140px;
-            height: 140px;
-            background: rgba(50, 50, 50, 0.8);
-            border: 2px solid rgba(80, 80, 80, 0.5);
-            border-radius: 12px;
-            margin: 0 auto 15px auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9em;
-            color: #888;
-            position: relative;
-            overflow: hidden;
             transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(50px);
         }
 
-        .qr-item:hover .qr-code {
-            border-color: rgba(100, 150, 255, 0.8);
-            box-shadow: 0 0 15px rgba(100, 150, 255, 0.4);
+        .image-item.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .qr-code img {
-            max-width: 100%;
-            max-height: 100%;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .qr-item:hover .qr-code img {
+        .image-item:hover {
+            transform: translateY(-8px) scale(1.03);
             filter: brightness(1.1);
         }
 
-        .qr-label {
-            font-size: 0.95em;
-            color: #c0c0c0;
-            font-weight: 400;
-            margin-top: 10px;
+        .memorial-image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            border: 2px solid rgba(60, 60, 60, 0.5);
         }
 
+        .image-item:hover .memorial-image {
+            border-color: rgba(100, 150, 255, 0.8);
+            box-shadow: 
+                0 12px 35px rgba(0,0,0,0.4), 
+                0 0 20px rgba(100, 150, 255, 0.4);
+        }
 
+        .image-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 15px 10px 10px;
+            font-size: 0.9em;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .image-item:hover .image-label {
+            opacity: 1;
+        }
 
         .footer {
             text-align: center;
@@ -180,26 +173,40 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            backdrop-filter: blur(5px);
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal.show {
+            opacity: 1;
         }
 
         .modal-content {
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%) scale(0.8);
             max-width: 90vw;
             max-height: 90vh;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 0 30px rgba(100, 150, 255, 0.5);
+            transition: all 0.4s ease;
+            box-shadow: 
+                0 0 50px rgba(100, 150, 255, 0.6),
+                0 0 100px rgba(100, 150, 255, 0.3);
+        }
+
+        .modal.show .modal-content {
+            transform: translate(-50%, -50%) scale(1);
         }
 
         .modal-image {
             width: 100%;
             height: 100%;
             object-fit: contain;
+            border-radius: 15px;
         }
 
         .modal-close {
@@ -211,64 +218,139 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             border-radius: 50%;
             width: 40px;
             height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 1001;
         }
 
         .modal-close:hover {
             color: rgba(100, 150, 255, 1);
             background: rgba(0, 0, 0, 0.8);
             transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(100, 150, 255, 0.5);
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
             .memorial-title {
-                font-size: 2.2em;
+                font-size: 2em;
                 letter-spacing: 1px;
             }
             
-            .qr-grid {
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            .header {
+                padding: 25px 20px;
+            }
+            
+            .image-grid {
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
                 gap: 15px;
             }
             
-            .qr-code {
-                width: 110px;
-                height: 110px;
-            }
-            
             .content {
-                padding: 20px;
+                padding: 15px;
+            }
+
+            .description {
+                font-size: 1em;
+                padding: 0 10px;
             }
 
             .modal-content {
                 max-width: 95vw;
-                max-height: 95vh;
+                max-height: 85vh;
+            }
+
+            .modal-close {
+                top: 10px;
+                right: 10px;
+                width: 35px;
+                height: 35px;
+                font-size: 24px;
             }
         }
 
-        /* Animation für loading */
-        .qr-item {
-            animation: fadeInUp 0.8s ease forwards;
-            opacity: 0;
-            transform: translateY(30px);
-        }
+        /* Extra kleine Handys */
+        @media (max-width: 480px) {
+            .memorial-title {
+                font-size: 1.8em;
+            }
 
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            .memorial-subtitle {
+                font-size: 1em;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            .content {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 20px 15px;
+            }
+
+            .description {
+                font-size: 0.95em;
+                margin-bottom: 20px;
+            }
+
+            .modal-content {
+                max-width: 98vw;
+                max-height: 80vh;
             }
         }
 
-        /* Stagger animation delay */
-        .qr-item:nth-child(n) { animation-delay: calc(0.1s * var(--item-index, 1)); }
+        /* Sehr kleine Handys */
+        @media (max-width: 375px) {
+            .memorial-title {
+                font-size: 1.6em;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
+                gap: 12px;
+                max-width: 320px;
+            }
+        }
+
+        /* Landscape Modus auf Handys */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .memorial-title {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px 15px;
+            }
+
+            .image-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 15px;
+            }
+
+            .modal-content {
+                max-width: 90vw;
+                max-height: 75vh;
+            }
+        }
 
         /* Scrollbar styling */
         ::-webkit-scrollbar {
@@ -305,9 +387,7 @@
                 Klicken Sie auf ein Bild, um es vergrößert zu betrachten.
             </div>
 
-
-
-            <div class="qr-grid" id="qr-grid">
+            <div class="image-grid" id="image-grid">
                 <!-- Images will be dynamically added here -->
             </div>
         </div>
@@ -328,49 +408,22 @@
 
     <script>
         let imageCount = 0;
-        const maxImages = 24; // Angepasst für die vorhandenen Bilder
-
-
-
-        function addImage(imageSrc, fileName) {
-            if (imageCount >= maxImages) {
-                return;
-            }
-
-            imageCount++;
-            const grid = document.getElementById('qr-grid');
-            
-            const imageItem = document.createElement('div');
-            imageItem.className = 'qr-item';
-            imageItem.style.setProperty('--item-index', imageCount);
-            
-            // Handle both file uploads (base64) and direct image names
-            const imgSrc = imageSrc.startsWith('data:') ? imageSrc : imageSrc;
-            
-            imageItem.innerHTML = `
-                <div class="qr-code">
-                    <img src="${imgSrc}" alt="${fileName}" onclick="openModal('${imgSrc}')">
-                </div>
-                <div class="qr-label">${fileName || `Erinnerung ${imageCount}`}</div>
-            `;
-
-            grid.appendChild(imageItem);
-        }
-
-
+        const maxImages = 24;
 
         function loadFromFolder() {
-            // Load all images from the same folder - using actual filenames from GitHub
+            // Lade alle Bilder aus dem gleichen Ordner - echte Dateinamen
             const imageNames = [
                 'bild_029.jpg', 'bild_031.jpg', 'bild_033.jpg', 'bild_035.jpg', 
                 'bild_037.jpg', 'bild_039.jpg', 'bild_041.jpg', 'bild_043.jpg'
             ];
 
             imageNames.forEach((imageName, index) => {
-                // Try to load each image
+                // Versuche jedes Bild zu laden
                 const img = new Image();
                 img.onload = function() {
-                    addImage(imageName, `Alper Cinar - ${index + 1}`);
+                    setTimeout(() => {
+                        addImage(imageName, `Alper Cinar - ${index + 1}`);
+                    }, index * 150); // Gestaffelte Animation
                 };
                 img.onerror = function() {
                     console.log(`Bild ${imageName} konnte nicht geladen werden`);
@@ -379,42 +432,110 @@
             });
         }
 
+        function addImage(imageSrc, fileName) {
+            if (imageCount >= maxImages) {
+                return;
+            }
 
+            imageCount++;
+            const grid = document.getElementById('image-grid');
+            
+            const imageItem = document.createElement('div');
+            imageItem.className = 'image-item';
+            
+            const imgSrc = imageSrc.startsWith('data:') ? imageSrc : imageSrc;
+            
+            imageItem.innerHTML = `
+                <img class="memorial-image" src="${imgSrc}" alt="${fileName}">
+                <div class="image-label">${fileName || `Erinnerung ${imageCount}`}</div>
+            `;
 
-        // Modal functionality
+            // Click-Event für Modal
+            const img = imageItem.querySelector('.memorial-image');
+            img.addEventListener('click', function(e) {
+                // Blaue Leucht-Animation beim Klick
+                this.style.boxShadow = '0 0 30px rgba(100, 150, 255, 0.8), 0 0 60px rgba(100, 150, 255, 0.5)';
+                this.style.borderColor = 'rgba(100, 150, 255, 1)';
+                
+                setTimeout(() => {
+                    openModal(imgSrc);
+                    // Reset nach Modal-Öffnung
+                    this.style.boxShadow = '';
+                    this.style.borderColor = '';
+                }, 300);
+            });
+
+            grid.appendChild(imageItem);
+        }
+
+        // Modal functionality mit Animation
         function openModal(imageSrc) {
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImg');
+            
             modal.style.display = 'block';
             modalImg.src = imageSrc;
+            
+            // Trigger Animation
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
         }
 
-        // Close modal
-        document.querySelector('.modal-close').onclick = function() {
-            document.getElementById('imageModal').style.display = 'none';
+        // Close modal mit Animation
+        function closeModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.remove('show');
+            
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 400);
         }
 
-        // Close modal when clicking outside the image
+        // Close modal events
+        document.querySelector('.modal-close').onclick = closeModal;
+
         window.onclick = function(event) {
             const modal = document.getElementById('imageModal');
             if (event.target == modal) {
-                modal.style.display = 'none';
+                closeModal();
             }
         }
 
-        // Close modal with ESC key
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
-                document.getElementById('imageModal').style.display = 'none';
+                closeModal();
             }
         });
 
+        // Scroll Animation Observer
+        function setupScrollAnimations() {
+            const imageItems = document.querySelectorAll('.image-item');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '50px'
+            });
 
+            imageItems.forEach(item => {
+                observer.observe(item);
+            });
+        }
 
         // Automatisches Laden der Bilder beim Seitenstart
         window.addEventListener('load', function() {
-            document.body.style.opacity = '1';
-            loadFromFolder(); // Lade alle Bilder automatisch
+            loadFromFolder();
+            
+            // Setup scroll animations nach kurzem Delay
+            setTimeout(() => {
+                setupScrollAnimations();
+            }, 1000);
         });
     </script>
 </body>

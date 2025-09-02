@@ -235,6 +235,60 @@
             box-shadow: 0 0 15px rgba(100, 150, 255, 0.5);
         }
 
+        /* Modal Navigation */
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(100, 150, 255, 0.5);
+            color: rgba(100, 150, 255, 0.8);
+            width: 50px;
+            height: 80px;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            border-radius: 8px;
+        }
+
+        .modal-prev {
+            left: 10px;
+        }
+
+        .modal-next {
+            right: 10px;
+        }
+
+        .modal-nav:hover {
+            background: rgba(100, 150, 255, 0.2);
+            border-color: rgba(100, 150, 255, 0.8);
+            color: rgba(100, 150, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 15px rgba(100, 150, 255, 0.4);
+        }
+
+        .modal-nav:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .modal-counter {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: rgba(100, 150, 255, 0.9);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            border: 1px solid rgba(100, 150, 255, 0.3);
+            z-index: 1001;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             body {
@@ -343,6 +397,26 @@
                 font-size: 28px;
                 background: rgba(0, 0, 0, 0.9);
             }
+
+            .modal-nav {
+                width: 45px;
+                height: 70px;
+                font-size: 20px;
+            }
+
+            .modal-prev {
+                left: 5px;
+            }
+
+            .modal-next {
+                right: 5px;
+            }
+
+            .modal-counter {
+                bottom: 10px;
+                font-size: 12px;
+                padding: 6px 12px;
+            }
         }
 
         /* Sehr kleine Handys */
@@ -445,12 +519,17 @@
         <span class="modal-close">&times;</span>
         <div class="modal-content">
             <img class="modal-image" id="modalImg">
+            <button class="modal-nav modal-prev" id="modalPrev">‹</button>
+            <button class="modal-nav modal-next" id="modalNext">›</button>
+            <div class="modal-counter" id="modalCounter">1 / 8</div>
         </div>
     </div>
 
     <script>
         let imageCount = 0;
         const maxImages = 24;
+        let imageGallery = []; // Array für alle Bilder
+        let currentImageIndex = 0; // Aktueller Bildindex
 
         function loadFromFolder() {
             // Lade alle Bilder aus dem gleichen Ordner - echte Dateinamen
@@ -463,6 +542,12 @@
                 // Versuche jedes Bild zu laden
                 const img = new Image();
                 img.onload = function() {
+                    // Füge Bild zur Galerie hinzu
+                    imageGallery.push({
+                        src: imageName,
+                        name: `Alper Cinar - ${index + 1}`
+                    });
+                    
                     setTimeout(() => {
                         addImage(imageName, `Alper Cinar - ${index + 1}`);
                     }, index * 150); // Gestaffelte Animation
@@ -492,15 +577,17 @@
                 <div class="image-label">${fileName || `Erinnerung ${imageCount}`}</div>
             `;
 
-            // Click-Event für Modal
+            // Click-Event für Modal mit Index
             const img = imageItem.querySelector('.memorial-image');
+            const imageIndex = imageCount - 1; // Index für dieses Bild
+            
             img.addEventListener('click', function(e) {
                 // Blaue Leucht-Animation beim Klick
                 this.style.boxShadow = '0 0 30px rgba(100, 150, 255, 0.8), 0 0 60px rgba(100, 150, 255, 0.5)';
                 this.style.borderColor = 'rgba(100, 150, 255, 1)';
                 
                 setTimeout(() => {
-                    openModal(imgSrc);
+                    openModal(imageIndex);
                     // Reset nach Modal-Öffnung
                     this.style.boxShadow = '';
                     this.style.borderColor = '';
@@ -510,18 +597,42 @@
             grid.appendChild(imageItem);
         }
 
-        // Modal functionality mit Animation
-        function openModal(imageSrc) {
+        // Modal functionality mit Navigation
+        function openModal(imageIndex) {
+            currentImageIndex = imageIndex;
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImg');
+            const modalCounter = document.getElementById('modalCounter');
             
-            modal.style.display = 'block';
-            modalImg.src = imageSrc;
-            
-            // Trigger Animation
-            setTimeout(() => {
-                modal.classList.add('show');
-            }, 10);
+            if (imageGallery[currentImageIndex]) {
+                modal.style.display = 'block';
+                modalImg.src = imageGallery[currentImageIndex].src;
+                updateModalCounter();
+                
+                // Trigger Animation
+                setTimeout(() => {
+                    modal.classList.add('show');
+                }, 10);
+            }
+        }
+
+        function updateModalCounter() {
+            const modalCounter = document.getElementById('modalCounter');
+            modalCounter.textContent = `${currentImageIndex + 1} / ${imageGallery.length}`;
+        }
+
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex + 1) % imageGallery.length;
+            const modalImg = document.getElementById('modalImg');
+            modalImg.src = imageGallery[currentImageIndex].src;
+            updateModalCounter();
+        }
+
+        function showPrevImage() {
+            currentImageIndex = (currentImageIndex - 1 + imageGallery.length) % imageGallery.length;
+            const modalImg = document.getElementById('modalImg');
+            modalImg.src = imageGallery[currentImageIndex].src;
+            updateModalCounter();
         }
 
         // Close modal mit Animation
@@ -534,20 +645,75 @@
             }, 400);
         }
 
-        // Close modal events
-        document.querySelector('.modal-close').onclick = closeModal;
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Close modal events
+            document.querySelector('.modal-close').onclick = closeModal;
+            
+            // Navigation buttons
+            document.getElementById('modalPrev').onclick = showPrevImage;
+            document.getElementById('modalNext').onclick = showNextImage;
 
-        window.onclick = function(event) {
-            const modal = document.getElementById('imageModal');
-            if (event.target == modal) {
-                closeModal();
+            // Click outside modal to close
+            window.onclick = function(event) {
+                const modal = document.getElementById('imageModal');
+                if (event.target == modal) {
+                    closeModal();
+                }
             }
-        }
 
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeModal();
-            }
+            // Keyboard navigation
+            document.addEventListener('keydown', function(event) {
+                const modal = document.getElementById('imageModal');
+                if (modal.style.display === 'block') {
+                    switch(event.key) {
+                        case 'Escape':
+                            closeModal();
+                            break;
+                        case 'ArrowLeft':
+                            showPrevImage();
+                            break;
+                        case 'ArrowRight':
+                            showNextImage();
+                            break;
+                    }
+                }
+            });
+
+            // Touch/Swipe navigation für Mobile
+            let startX = 0;
+            let startY = 0;
+
+            const modalContent = document.querySelector('.modal-content');
+
+            modalContent.addEventListener('touchstart', function(e) {
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+            });
+
+            modalContent.addEventListener('touchend', function(e) {
+                if (!startX || !startY) return;
+                
+                let endX = e.changedTouches[0].clientX;
+                let endY = e.changedTouches[0].clientY;
+                
+                let deltaX = startX - endX;
+                let deltaY = startY - endY;
+                
+                // Mindest-Swipe-Distanz
+                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                    if (deltaX > 0) {
+                        // Swipe nach links = nächstes Bild
+                        showNextImage();
+                    } else {
+                        // Swipe nach rechts = vorheriges Bild
+                        showPrevImage();
+                    }
+                }
+                
+                startX = 0;
+                startY = 0;
+            });
         });
 
         // Scroll Animation Observer

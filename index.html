@@ -660,11 +660,31 @@
             currentImageIndex = imageIndex;
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImg');
+            const modalContent = modal.querySelector('.modal-content');
             
             if (imageGallery[currentImageIndex]) {
                 modal.style.display = 'block';
                 modalImg.src = imageGallery[currentImageIndex].src;
                 updateModalCounter();
+                
+                // Mobiler Glow-Effekt direkt hinzufügen
+                if (isMobile) {
+                    modalContent.style.border = '4px solid rgba(100, 150, 255, 0.9)';
+                    modalContent.style.boxShadow = `
+                        0 0 40px rgba(100, 150, 255, 1),
+                        0 0 80px rgba(100, 150, 255, 0.8),
+                        0 0 120px rgba(100, 150, 255, 0.6)`;
+                    modalContent.style.animation = 'handy_glow_animation 2s ease-in-out infinite alternate';
+                    
+                    // Zusätzlicher Glow-Effekt
+                    setInterval(() => {
+                        if (modal.style.display === 'block' && isMobile) {
+                            const intensity = Math.sin(Date.now() * 0.003) * 0.5 + 0.5;
+                            modalContent.style.filter = `brightness(${1 + intensity * 0.3})`;
+                            modalContent.style.borderColor = `rgba(100, 150, 255, ${0.7 + intensity * 0.3})`;
+                        }
+                    }, 100);
+                }
                 
                 setTimeout(() => {
                     modal.classList.add('show');

@@ -750,11 +750,12 @@
                 }
             });
 
-            // Touch/Swipe Navigation
+            // Verbesserte Touch/Swipe Navigation mit flüssigen Animationen
             let startX = 0;
             let startY = 0;
             let currentX = 0;
             let isSwipping = false;
+            let swipeThreshold = 60;
 
             const modalImg = document.getElementById('modalImg');
 
@@ -763,8 +764,9 @@
                     startX = e.touches[0].clientX;
                     startY = e.touches[0].clientY;
                     isSwipping = false;
+                    modalImg.classList.add('live-swipe');
                 }
-            });
+            }, { passive: true });
 
             modalImg.addEventListener('touchmove', function(e) {
                 if (!isMobile || !startX) return;
@@ -773,21 +775,26 @@
                 const deltaX = currentX - startX;
                 const deltaY = e.touches[0].clientY - startY;
                 
-                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 20) {
+                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 15) {
                     isSwipping = true;
                     e.preventDefault();
                     
-                    // Live Swipe Animation
-                    const opacity = 1 - (Math.abs(deltaX) / window.innerWidth) * 0.7;
-                    const scale = 1 - (Math.abs(deltaX) / window.innerWidth) * 0.15;
-                    modalImg.style.transform = `translateX(${deltaX * 0.5}px) scale(${scale})`;
+                    // Flüssige Live-Animation
+                    const progress = Math.min(Math.abs(deltaX) / window.innerWidth, 0.8);
+                    const opacity = 1 - (progress * 0.7);
+                    const scale = 1 - (progress * 0.2);
+                    const blur = progress * 8;
+                    const translateX = deltaX * 0.6;
+                    
+                    modalImg.style.transform = `translateX(${translateX}px) scale(${scale})`;
                     modalImg.style.opacity = opacity;
-                    modalImg.style.filter = `blur(${Math.abs(deltaX) / 100}px)`;
+                    modalImg.style.filter = `blur(${blur}px)`;
                 }
-            });
+            }, { passive: false });
 
             modalImg.addEventListener('touchend', function(e) {
                 if (!isMobile || !startX || !isSwipping) {
+                    modalImg.classList.remove('live-swipe');
                     modalImg.style.transform = '';
                     modalImg.style.opacity = '';
                     modalImg.style.filter = '';
@@ -797,22 +804,63 @@
                 const endX = e.changedTouches[0].clientX;
                 const deltaX = startX - endX;
                 
-                if (Math.abs(deltaX) > 80) {
+                modalImg.classList.remove('live-swipe');
+                
+                if (Math.abs(deltaX) > swipeThreshold) {
                     if (deltaX > 0) {
-                        showNextImage();
+                        // Swipe links = nächstes Bild
+                        modalImg.classList.add('swipe-left');
+                        setTimeout(() => {
+                            currentImageIndex = (currentImageIndex + 1) % imageGallery.length;
+                            modalImg.src = imageGallery[currentImageIndex].src;
+                            updateModalCounter();
+                            
+                            modalImg.classList.remove('swipe-left');
+                            modalImg.classList.add('swipe-back');
+                            modalImg.style.transform = '';
+                            modalImg.style.opacity = '';
+                            modalImg.style.filter = '';
+                            
+                            setTimeout(() => {
+                                modalImg.classList.remove('swipe-back');
+                            }, 400);
+                        }, 200);
                     } else {
-                        showPrevImage();
+                        // Swipe rechts = vorheriges Bild
+                        modalImg.classList.add('swipe-right');
+                        setTimeout(() => {
+                            currentImageIndex = (currentImageIndex - 1 + imageGallery.length) % imageGallery.length;
+                            modalImg.src = imageGallery[currentImageIndex].src;
+                            updateModalCounter();
+                            
+                            modalImg.classList.remove('swipe-right');
+                            modalImg.classList.add('swipe-back');
+                            modalImg.style.transform = '';
+                            modalImg.style.opacity = '';
+                            modalImg.style.filter = '';
+                            
+                            setTimeout(() => {
+                                modalImg.classList.remove('swipe-back');
+                            }, 400);
+                        }, 200);
                     }
                 } else {
+                    // Snap zurück
                     modalImg.style.transform = 'translateX(0) scale(1)';
                     modalImg.style.opacity = '1';
                     modalImg.style.filter = 'blur(0)';
+                    
+                    setTimeout(() => {
+                        modalImg.style.transform = '';
+                        modalImg.style.opacity = '';
+                        modalImg.style.filter = '';
+                    }, 300);
                 }
                 
                 startX = 0;
                 startY = 0;
                 isSwipping = false;
-            });
+            }, { passive: true });
 
             // Click outside to close
             window.onclick = function(event) {

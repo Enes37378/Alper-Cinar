@@ -498,7 +498,7 @@
             const imgSrc = imageSrc.startsWith('data:') ? imageSrc : imageSrc;
             
             imageItem.innerHTML = `
-                <img class="memorial-image" src="${imgSrc}" alt="${fileName}">
+                <img class="memorial-image" src="${imgSrc}" alt="${fileName}" onload="console.log('Thumbnail geladen: ${fileName}')">
                 <div class="image-label">${fileName || `Erinnerung ${imageCount}`}</div>
             `;
 
@@ -507,6 +507,7 @@
             const imageIndex = imageCount - 1; // Index für dieses Bild
             
             img.addEventListener('click', function(e) {
+                console.log('Bild geklickt:', fileName, 'Index:', imageIndex);
                 // Blaue Leucht-Animation beim Klick
                 this.style.boxShadow = '0 0 30px rgba(100, 150, 255, 0.8), 0 0 60px rgba(100, 150, 255, 0.5)';
                 this.style.borderColor = 'rgba(100, 150, 255, 1)';
@@ -520,6 +521,12 @@
             });
 
             grid.appendChild(imageItem);
+            console.log('Thumbnail hinzugefügt:', fileName, 'Anzahl im Grid:', grid.children.length);
+            
+            // Trigger scroll animation nach einem kurzen Delay
+            setTimeout(() => {
+                imageItem.classList.add('visible');
+            }, 100);
         }
 
         // Modal functionality mit Navigation

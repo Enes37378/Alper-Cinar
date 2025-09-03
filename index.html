@@ -96,7 +96,7 @@
 
         .image-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
             margin-top: 30px;
         }
@@ -104,7 +104,7 @@
         .image-item {
             position: relative;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             opacity: 0;
             transform: translateY(50px);
         }
@@ -115,25 +115,25 @@
         }
 
         .image-item:hover {
-            transform: translateY(-8px) scale(1.03);
-            filter: brightness(1.1);
+            transform: translateY(-10px) scale(1.05);
         }
 
         .memorial-image {
             width: 100%;
             height: auto;
             object-fit: cover;
-            border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            transition: all 0.4s ease;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             border: 2px solid rgba(60, 60, 60, 0.5);
         }
 
         .image-item:hover .memorial-image {
             border-color: rgba(100, 150, 255, 0.8);
             box-shadow: 
-                0 12px 35px rgba(0,0,0,0.4), 
-                0 0 20px rgba(100, 150, 255, 0.4);
+                0 15px 40px rgba(0,0,0,0.5), 
+                0 0 30px rgba(100, 150, 255, 0.6);
+            filter: brightness(1.1);
         }
 
         .image-label {
@@ -141,14 +141,14 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
             color: white;
-            padding: 15px 10px 10px;
-            font-size: 0.9em;
+            padding: 20px 15px 15px;
+            font-size: 0.95em;
             text-align: center;
-            border-radius: 0 0 10px 10px;
+            border-radius: 0 0 13px 13px;
             opacity: 0;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
 
         .image-item:hover .image-label {
@@ -174,15 +174,16 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             opacity: 0;
-            transition: opacity 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .modal.show {
             opacity: 1;
         }
 
+        /* Desktop Modal Layout */
         .modal-content {
             position: absolute;
             top: 50%;
@@ -190,12 +191,12 @@
             transform: translate(-50%, -50%) scale(0.8);
             max-width: 90vw;
             max-height: 90vh;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            transition: all 0.4s ease;
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 
-                0 0 50px rgba(100, 150, 255, 0.6),
-                0 0 100px rgba(100, 150, 255, 0.3);
+                0 0 60px rgba(100, 150, 255, 0.7),
+                0 0 120px rgba(100, 150, 255, 0.4);
         }
 
         .modal.show .modal-content {
@@ -206,23 +207,25 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-            border-radius: 15px;
-            background: rgba(20, 20, 20, 0.9);
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
+        /* Desktop Controls */
         .modal-close {
             position: absolute;
-            top: 15px;
-            right: 20px;
+            top: 20px;
+            right: 25px;
             color: rgba(100, 150, 255, 0.8);
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(0, 0, 0, 0.6);
+            transition: all 0.4s ease;
+            background: rgba(0, 0, 0, 0.7);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -231,9 +234,189 @@
 
         .modal-close:hover {
             color: rgba(100, 150, 255, 1);
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.15);
+            box-shadow: 0 0 20px rgba(100, 150, 255, 0.6);
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid rgba(100, 150, 255, 0.5);
+            color: rgba(100, 150, 255, 0.8);
+            width: 60px;
+            height: 100px;
+            font-size: 28px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1001;
+            border-radius: 12px;
+        }
+
+        .modal-prev {
+            left: 15px;
+        }
+
+        .modal-next {
+            right: 15px;
+        }
+
+        .modal-nav:hover {
+            background: rgba(100, 150, 255, 0.2);
+            border-color: rgba(100, 150, 255, 0.9);
+            color: rgba(100, 150, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 20px rgba(100, 150, 255, 0.5);
+        }
+
+        .modal-nav:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .modal-counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             background: rgba(0, 0, 0, 0.8);
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(100, 150, 255, 0.5);
+            color: rgba(100, 150, 255, 0.9);
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            border: 1px solid rgba(100, 150, 255, 0.3);
+            z-index: 1001;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Mobile Layout */
+        .mobile .modal-content {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 90px;
+            max-width: 100vw;
+            max-height: calc(100vh - 90px);
+            border-radius: 0;
+            transform: scale(0.95);
+        }
+
+        .mobile .modal.show .modal-content {
+            transform: scale(1);
+        }
+
+        .mobile .modal-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 0;
+            background: rgba(0, 0, 0, 1);
+        }
+
+        /* Mobile Controls verstecken */
+        .mobile .modal-close:not(#modalCloseMobile) {
+            display: none !important;
+        }
+
+        .mobile .modal-nav:not(#modalPrevMobile):not(#modalNextMobile) {
+            display: none !important;
+        }
+
+        .mobile .modal-counter:not(#modalCounterMobile) {
+            display: none !important;
+        }
+
+        /* Mobile Controls Bar */
+        .mobile-controls {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(20, 20, 20, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px;
+            z-index: 1002;
+            border-top: 2px solid rgba(100, 150, 255, 0.3);
+        }
+
+        .mobile .mobile-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .mobile-nav-group {
+            display: flex;
+            gap: 20px;
+        }
+
+        .mobile .modal-nav {
+            position: static;
+            transform: none;
+            width: 55px;
+            height: 55px;
+            font-size: 22px;
+            background: rgba(100, 150, 255, 0.1);
+            border: 2px solid rgba(100, 150, 255, 0.5);
+            border-radius: 12px;
+        }
+
+        .mobile .modal-nav:hover {
+            background: rgba(100, 150, 255, 0.3);
+            transform: none;
+        }
+
+        .mobile .modal-close {
+            position: static;
+            width: 55px;
+            height: 55px;
+            font-size: 22px;
+            background: rgba(220, 53, 69, 0.2);
+            border: 2px solid rgba(220, 53, 69, 0.5);
+            color: rgba(220, 53, 69, 0.8);
+        }
+
+        .mobile .modal-close:hover {
+            background: rgba(220, 53, 69, 0.3);
+            color: rgba(220, 53, 69, 1);
+            transform: none;
+        }
+
+        .mobile .modal-counter {
+            position: static;
+            transform: none;
+            background: transparent;
+            border: none;
+            color: rgba(100, 150, 255, 0.9);
+            padding: 0;
+            font-size: 18px;
+            flex: 1;
+            text-align: center;
+        }
+
+        /* Wisch-Animationen */
+        .modal-image.swipe-left {
+            transform: translateX(-50px) scale(0.9);
+            opacity: 0.6;
+            filter: blur(2px);
+        }
+
+        .modal-image.swipe-right {
+            transform: translateX(50px) scale(0.9);
+            opacity: 0.6;
+            filter: blur(2px);
+        }
+
+        .modal-image.swipe-back {
+            transform: translateX(0) scale(1);
+            opacity: 1;
+            filter: blur(0);
         }
 
         /* Responsive Design */
@@ -252,115 +435,79 @@
             }
             
             .image-grid {
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-                gap: 15px;
+                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                gap: 20px;
             }
             
             .content {
-                padding: 15px;
+                padding: 20px;
             }
 
             .description {
                 font-size: 1em;
                 padding: 0 10px;
             }
-
-            .modal-content {
-                max-width: 95vw;
-                max-height: 85vh;
-            }
-
-            .modal-close {
-                top: 10px;
-                right: 10px;
-                width: 35px;
-                height: 35px;
-                font-size: 24px;
-            }
         }
 
-        /* Extra kleine Handys */
         @media (max-width: 480px) {
             .memorial-title {
                 font-size: 1.8em;
             }
 
-            .memorial-subtitle {
-                font-size: 1em;
-            }
-
             .image-grid {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                gap: 12px;
+                grid-template-columns: 1fr;
+                gap: 15px;
+                max-width: 350px;
+                margin: 0 auto;
             }
 
             .content {
-                padding: 10px;
-            }
-
-            .header {
-                padding: 20px 15px;
-            }
-
-            .description {
-                font-size: 0.95em;
-                margin-bottom: 20px;
-            }
-
-            .modal-content {
-                max-width: 98vw;
-                max-height: 80vh;
+                padding: 15px;
             }
         }
 
-        /* Sehr kleine Handys */
-        @media (max-width: 375px) {
-            .memorial-title {
-                font-size: 1.6em;
-            }
+        /* Scroll Animationen */
+        .image-item {
+            animation-fill-mode: forwards;
+        }
 
-            .image-grid {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-                gap: 10px;
+        .image-item:nth-child(1) { animation-delay: 0.1s; }
+        .image-item:nth-child(2) { animation-delay: 0.2s; }
+        .image-item:nth-child(3) { animation-delay: 0.3s; }
+        .image-item:nth-child(4) { animation-delay: 0.4s; }
+        .image-item:nth-child(5) { animation-delay: 0.5s; }
+        .image-item:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        /* Landscape Modus auf Handys */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .header {
-                padding: 15px 20px;
-            }
-
-            .memorial-title {
-                font-size: 1.8em;
-            }
-
-            .content {
-                padding: 20px 15px;
-            }
-
-            .image-grid {
-                grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            }
-
-            .modal-content {
-                max-width: 90vw;
-                max-height: 75vh;
-            }
+        /* Klick Animationen */
+        .image-item.clicked .memorial-image {
+            box-shadow: 
+                0 0 40px rgba(100, 150, 255, 1),
+                0 0 80px rgba(100, 150, 255, 0.7),
+                0 15px 40px rgba(0,0,0,0.5);
+            border-color: rgba(100, 150, 255, 1);
+            transform: scale(1.03);
         }
 
         /* Scrollbar styling */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
 
         ::-webkit-scrollbar-track {
             background: rgba(40, 40, 40, 0.5);
+            border-radius: 5px;
         }
 
         ::-webkit-scrollbar-thumb {
             background: rgba(100, 150, 255, 0.5);
-            border-radius: 4px;
+            border-radius: 5px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
@@ -400,15 +547,26 @@
         <span class="modal-close">&times;</span>
         <div class="modal-content">
             <img class="modal-image" id="modalImg">
+            <button class="modal-nav modal-prev" id="modalPrev">‹</button>
+            <button class="modal-nav modal-next" id="modalNext">›</button>
+            <div class="modal-counter" id="modalCounter">1 / 22</div>
+        </div>
+        <div class="mobile-controls">
+            <div class="mobile-nav-group">
+                <button class="modal-nav modal-prev" id="modalPrevMobile">‹</button>
+                <button class="modal-nav modal-next" id="modalNextMobile">›</button>
+            </div>
+            <div class="modal-counter" id="modalCounterMobile">1 / 22</div>
+            <span class="modal-close" id="modalCloseMobile">&times;</span>
         </div>
     </div>
 
     <script>
         let imageCount = 0;
-        const maxImages = 24;
-        let imageGallery = []; // Array für alle Bilder
-        let currentImageIndex = 0; // Aktueller Bildindex
-        let isMobile = false; // Device-Detection
+        const maxImages = 22;
+        let imageGallery = [];
+        let currentImageIndex = 0;
+        let isMobile = false;
 
         // Device Detection
         function detectDevice() {
@@ -416,7 +574,6 @@
             const isSmallScreen = window.innerWidth <= 768;
             isMobile = isTouchDevice && isSmallScreen;
             
-            // CSS-Klasse setzen
             if (isMobile) {
                 document.body.classList.add('mobile');
             } else {
@@ -432,14 +589,12 @@
                 imageNames.push(fileName);
             }
 
-            console.log('Versuche zu laden:', imageNames);
+            console.log('Lade Bilder:', imageNames);
 
             imageNames.forEach((imageName, index) => {
-                // Versuche jedes Bild zu laden
                 const img = new Image();
                 img.onload = function() {
-                    console.log('Bild geladen:', imageName);
-                    // Füge Bild zur Galerie hinzu
+                    console.log('Erfolgreich geladen:', imageName);
                     imageGallery.push({
                         src: imageName,
                         name: `Alper Cinar - ${index + 1}`
@@ -447,47 +602,28 @@
                     
                     setTimeout(() => {
                         addImage(imageName, `Alper Cinar - ${index + 1}`);
-                    }, index * 100); // Schnellere Animation
+                    }, index * 100);
                 };
+                
                 img.onerror = function() {
-                    console.log(`Bild ${imageName} konnte nicht geladen werden - Pfad prüfen!`);
-                    
-                    // Fallback: Versuche anderen Pfad oder erstelle Demo-Bild
-                    const canvas = document.createElement('canvas');
-                    canvas.width = canvas.height = 300;
-                    const ctx = canvas.getContext('2d');
-                    
-                    // Erstelle Fallback-Bild
-                    const gradient = ctx.createLinearGradient(0, 0, 300, 300);
-                    gradient.addColorStop(0, '#667eea');
-                    gradient.addColorStop(1, '#764ba2');
-                    
-                    ctx.fillStyle = gradient;
-                    ctx.fillRect(0, 0, 300, 300);
-                    
-                    ctx.fillStyle = 'rgba(255,255,255,0.9)';
-                    ctx.font = 'bold 16px Arial';
-                    ctx.textAlign = 'center';
-                    ctx.fillText(`Bild ${index + 1}`, 150, 140);
-                    ctx.fillText('Lädt...', 150, 170);
-                    
+                    console.log('Fehler beim Laden:', imageName);
+                    // Trotzdem hinzufügen für Tests
                     imageGallery.push({
-                        src: canvas.toDataURL(),
+                        src: imageName,
                         name: `Alper Cinar - ${index + 1}`
                     });
                     
                     setTimeout(() => {
-                        addImage(canvas.toDataURL(), `Alper Cinar - ${index + 1}`);
+                        addImage(imageName, `Alper Cinar - ${index + 1}`);
                     }, index * 100);
                 };
+                
                 img.src = imageName;
             });
         }
 
         function addImage(imageSrc, fileName) {
-            if (imageCount >= maxImages) {
-                return;
-            }
+            if (imageCount >= maxImages) return;
 
             imageCount++;
             const grid = document.getElementById('image-grid');
@@ -495,41 +631,27 @@
             const imageItem = document.createElement('div');
             imageItem.className = 'image-item';
             
-            const imgSrc = imageSrc.startsWith('data:') ? imageSrc : imageSrc;
-            
             imageItem.innerHTML = `
-                <img class="memorial-image" src="${imgSrc}" alt="${fileName}" onload="console.log('Thumbnail geladen: ${fileName}')">
-                <div class="image-label">${fileName || `Erinnerung ${imageCount}`}</div>
+                <img class="memorial-image" src="${imageSrc}" alt="${fileName}">
+                <div class="image-label">${fileName}</div>
             `;
 
-            // Click-Event für Modal mit Index
             const img = imageItem.querySelector('.memorial-image');
-            const imageIndex = imageCount - 1; // Index für dieses Bild
+            const imageIndex = imageCount - 1;
             
             img.addEventListener('click', function(e) {
-                console.log('Bild geklickt:', fileName, 'Index:', imageIndex);
-                // Blaue Leucht-Animation beim Klick
-                this.style.boxShadow = '0 0 30px rgba(100, 150, 255, 0.8), 0 0 60px rgba(100, 150, 255, 0.5)';
-                this.style.borderColor = 'rgba(100, 150, 255, 1)';
+                // Klick-Animation
+                imageItem.classList.add('clicked');
                 
                 setTimeout(() => {
                     openModal(imageIndex);
-                    // Reset nach Modal-Öffnung
-                    this.style.boxShadow = '';
-                    this.style.borderColor = '';
-                }, 300);
+                    imageItem.classList.remove('clicked');
+                }, 400);
             });
 
             grid.appendChild(imageItem);
-            console.log('Thumbnail hinzugefügt:', fileName, 'Anzahl im Grid:', grid.children.length);
-            
-            // Trigger scroll animation nach einem kurzen Delay
-            setTimeout(() => {
-                imageItem.classList.add('visible');
-            }, 100);
         }
 
-        // Modal functionality mit Navigation
         function openModal(imageIndex) {
             currentImageIndex = imageIndex;
             const modal = document.getElementById('imageModal');
@@ -540,91 +662,77 @@
                 modalImg.src = imageGallery[currentImageIndex].src;
                 updateModalCounter();
                 
-                // Trigger Animation
                 setTimeout(() => {
                     modal.classList.add('show');
-                }, 10);
+                }, 50);
             }
         }
 
         function updateModalCounter() {
-            const modalCounter = document.getElementById('modalCounter');
-            const modalCounterMobile = document.getElementById('modalCounterMobile');
             const counterText = `${currentImageIndex + 1} / ${imageGallery.length}`;
-            
-            modalCounter.textContent = counterText;
-            modalCounterMobile.textContent = counterText;
+            document.getElementById('modalCounter').textContent = counterText;
+            document.getElementById('modalCounterMobile').textContent = counterText;
         }
 
         function showNextImage() {
             const modalImg = document.getElementById('modalImg');
             
-            // Animation beim Bildwechsel
-            modalImg.style.opacity = '0.6';
-            modalImg.style.transform = 'scale(0.98)';
+            modalImg.classList.add('swipe-left');
             
             setTimeout(() => {
                 currentImageIndex = (currentImageIndex + 1) % imageGallery.length;
                 modalImg.src = imageGallery[currentImageIndex].src;
                 updateModalCounter();
                 
-                // Zurück zur normalen Ansicht
-                modalImg.style.opacity = '1';
-                modalImg.style.transform = 'scale(1)';
-            }, 150);
+                modalImg.classList.remove('swipe-left');
+                modalImg.classList.add('swipe-back');
+                
+                setTimeout(() => {
+                    modalImg.classList.remove('swipe-back');
+                }, 400);
+            }, 300);
         }
 
         function showPrevImage() {
             const modalImg = document.getElementById('modalImg');
             
-            // Animation beim Bildwechsel
-            modalImg.style.opacity = '0.6';
-            modalImg.style.transform = 'scale(0.98)';
+            modalImg.classList.add('swipe-right');
             
             setTimeout(() => {
                 currentImageIndex = (currentImageIndex - 1 + imageGallery.length) % imageGallery.length;
                 modalImg.src = imageGallery[currentImageIndex].src;
                 updateModalCounter();
                 
-                // Zurück zur normalen Ansicht
-                modalImg.style.opacity = '1';
-                modalImg.style.transform = 'scale(1)';
-            }, 150);
+                modalImg.classList.remove('swipe-right');
+                modalImg.classList.add('swipe-back');
+                
+                setTimeout(() => {
+                    modalImg.classList.remove('swipe-back');
+                }, 400);
+            }, 300);
         }
 
-        // Close modal mit Animation
         function closeModal() {
             const modal = document.getElementById('imageModal');
             modal.classList.remove('show');
             
             setTimeout(() => {
                 modal.style.display = 'none';
-            }, 400);
+            }, 500);
         }
 
-        // Event Listeners
         function setupEventListeners() {
-            // Close modal events - beide Buttons
+            // Close Buttons
             document.querySelector('.modal-close').onclick = closeModal;
             document.getElementById('modalCloseMobile').onclick = closeModal;
             
-            // Navigation buttons - Desktop
+            // Navigation Buttons
             document.getElementById('modalPrev').onclick = showPrevImage;
             document.getElementById('modalNext').onclick = showNextImage;
-            
-            // Navigation buttons - Mobile
             document.getElementById('modalPrevMobile').onclick = showPrevImage;
             document.getElementById('modalNextMobile').onclick = showNextImage;
 
-            // Click outside modal to close (nur Desktop)
-            window.onclick = function(event) {
-                const modal = document.getElementById('imageModal');
-                if (event.target == modal && !isMobile) {
-                    closeModal();
-                }
-            }
-
-            // Keyboard navigation
+            // Keyboard Navigation
             document.addEventListener('keydown', function(event) {
                 const modal = document.getElementById('imageModal');
                 if (modal.style.display === 'block') {
@@ -642,9 +750,11 @@
                 }
             });
 
-            // Touch/Swipe navigation für Mobile
+            // Touch/Swipe Navigation
             let startX = 0;
             let startY = 0;
+            let currentX = 0;
+            let isSwipping = false;
 
             const modalImg = document.getElementById('modalImg');
 
@@ -652,43 +762,71 @@
                 if (isMobile) {
                     startX = e.touches[0].clientX;
                     startY = e.touches[0].clientY;
+                    isSwipping = false;
+                }
+            });
+
+            modalImg.addEventListener('touchmove', function(e) {
+                if (!isMobile || !startX) return;
+                
+                currentX = e.touches[0].clientX;
+                const deltaX = currentX - startX;
+                const deltaY = e.touches[0].clientY - startY;
+                
+                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 20) {
+                    isSwipping = true;
+                    e.preventDefault();
+                    
+                    // Live Swipe Animation
+                    const opacity = 1 - (Math.abs(deltaX) / window.innerWidth) * 0.7;
+                    const scale = 1 - (Math.abs(deltaX) / window.innerWidth) * 0.15;
+                    modalImg.style.transform = `translateX(${deltaX * 0.5}px) scale(${scale})`;
+                    modalImg.style.opacity = opacity;
+                    modalImg.style.filter = `blur(${Math.abs(deltaX) / 100}px)`;
                 }
             });
 
             modalImg.addEventListener('touchend', function(e) {
-                if (!isMobile || !startX || !startY) return;
+                if (!isMobile || !startX || !isSwipping) {
+                    modalImg.style.transform = '';
+                    modalImg.style.opacity = '';
+                    modalImg.style.filter = '';
+                    return;
+                }
                 
-                let endX = e.changedTouches[0].clientX;
-                let endY = e.changedTouches[0].clientY;
+                const endX = e.changedTouches[0].clientX;
+                const deltaX = startX - endX;
                 
-                let deltaX = startX - endX;
-                let deltaY = startY - endY;
-                
-                // Mindest-Swipe-Distanz
-                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 30) {
+                if (Math.abs(deltaX) > 80) {
                     if (deltaX > 0) {
-                        // Swipe nach links = nächstes Bild
                         showNextImage();
                     } else {
-                        // Swipe nach rechts = vorheriges Bild
                         showPrevImage();
                     }
+                } else {
+                    modalImg.style.transform = 'translateX(0) scale(1)';
+                    modalImg.style.opacity = '1';
+                    modalImg.style.filter = 'blur(0)';
                 }
                 
                 startX = 0;
                 startY = 0;
+                isSwipping = false;
             });
 
-            // Resize-Handler für Device-Detection
-            window.addEventListener('resize', function() {
-                detectDevice();
-            });
+            // Click outside to close
+            window.onclick = function(event) {
+                const modal = document.getElementById('imageModal');
+                if (event.target == modal && !isMobile) {
+                    closeModal();
+                }
+            }
+
+            // Resize Handler
+            window.addEventListener('resize', detectDevice);
         }
 
-        // Scroll Animation Observer
         function setupScrollAnimations() {
-            const imageItems = document.querySelectorAll('.image-item');
-            
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry) => {
                     if (entry.isIntersecting) {
@@ -700,21 +838,20 @@
                 rootMargin: '50px'
             });
 
-            imageItems.forEach(item => {
+            document.querySelectorAll('.image-item').forEach(item => {
                 observer.observe(item);
             });
         }
 
-        // Automatisches Laden der Bilder beim Seitenstart
+        // Initialization
         window.addEventListener('load', function() {
-            detectDevice(); // Device Detection beim Start
-            setupEventListeners(); // Event-Listeners einrichten
-            loadFromFolder(); // Bilder laden
+            detectDevice();
+            setupEventListeners();
+            loadFromFolder();
             
-            // Setup scroll animations nach kurzem Delay
             setTimeout(() => {
                 setupScrollAnimations();
-            }, 1000);
+            }, 1500);
         });
     </script>
 </body>

@@ -2,929 +2,1289 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#111214">
+    <meta name="color-scheme" content="dark">
+    <meta name="description" content="Eine Gedenkgalerie mit besonderen Erinnerungen an Alper Cinar.">
     <title>Zum Gedenken an Alper Cinar</title>
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
+        :root {
+            /* Vom anthrazitfarbenen Naturstein des Grabmals abgeleitete Palette */
+            --page-bg: #0d0e0f;
+            --surface: rgba(28, 29, 31, 0.96);
+            --surface-strong: #202124;
+            --surface-soft: #292a2d;
+            --stone-deep: #141517;
+            --stone-mid: #35373b;
+            --stone-light: #777a80;
+            --text: #f3f1eb;
+            --text-muted: #ccc8bf;
+            --text-subtle: #9f9c95;
+            --accent: #c4ad78;
+            --accent-strong: #e0cea1;
+            --accent-soft: rgba(196, 173, 120, 0.12);
+            --floral: #8e8298;
+            --green: #6f7c68;
+            --border: rgba(232, 229, 220, 0.13);
+            --border-strong: rgba(211, 194, 154, 0.45);
+            --danger: #e6b5b8;
+            --shadow: 0 30px 90px rgba(0, 0, 0, 0.52);
+            --focus-ring: 0 0 0 4px rgba(196, 173, 120, 0.26);
+            --radius-xl: 24px;
+            --radius-lg: 17px;
+            --radius-md: 13px;
+            --content-width: 1360px;
+            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
         }
 
+        html {
+            min-width: 280px;
+            background: var(--page-bg);
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 50%, #1f1f1f 100%);
             min-height: 100vh;
-            padding: 20px;
-            color: #e0e0e0;
+            min-height: 100dvh;
+            margin: 0;
+            color: var(--text);
+            background:
+                radial-gradient(circle at 12% 8%, rgba(119, 122, 128, 0.12), transparent 34rem),
+                radial-gradient(circle at 88% 18%, rgba(111, 124, 104, 0.07), transparent 30rem),
+                linear-gradient(145deg, #090a0b 0%, #17181a 48%, #0d0e0f 100%);
+            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: rgba(45, 45, 45, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(100, 150, 255, 0.1);
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.34;
+            background:
+                linear-gradient(118deg, transparent 0 38%, rgba(226, 226, 222, 0.045) 39%, transparent 40% 67%, rgba(190, 190, 186, 0.025) 68%, transparent 69%),
+                linear-gradient(64deg, transparent 0 52%, rgba(255, 255, 255, 0.025) 53%, transparent 54%),
+                radial-gradient(ellipse at 18% 22%, rgba(255, 255, 255, 0.035), transparent 35%),
+                radial-gradient(ellipse at 78% 72%, rgba(255, 255, 255, 0.022), transparent 30%);
+            background-size: 760px 620px, 980px 740px, 100% 100%, 100% 100%;
         }
 
-        .header {
-            background: linear-gradient(135deg, #1e1e1e, #2a2a2a);
-            color: white;
-            padding: 40px;
-            text-align: center;
+        button,
+        img {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        button {
+            font: inherit;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+
+        .skip-link {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            z-index: 10000;
+            padding: 10px 14px;
+            border-radius: 10px;
+            color: #09101d;
+            background: var(--accent-strong);
+            font-weight: 700;
+            text-decoration: none;
+            transform: translateY(-160%);
+            transition: transform 180ms ease;
+        }
+
+        .skip-link:focus {
+            transform: translateY(0);
+        }
+
+        .page-shell {
             position: relative;
-            border-bottom: 2px solid rgba(100, 150, 255, 0.2);
+            width: min(calc(100% - 32px), var(--content-width));
+            margin: clamp(16px, 3vw, 40px) auto;
+            overflow: clip;
+            border: 1px solid rgba(238, 235, 227, 0.16);
+            border-radius: var(--radius-xl);
+            background:
+                linear-gradient(116deg, transparent 0 29%, rgba(255, 255, 255, 0.025) 30%, transparent 31% 69%, rgba(255, 255, 255, 0.018) 70%, transparent 71%),
+                var(--surface);
+            box-shadow:
+                var(--shadow),
+                0 0 0 1px rgba(0, 0, 0, 0.5) inset,
+                0 0 0 5px rgba(255, 255, 255, 0.012) inset;
+            backdrop-filter: blur(18px);
         }
 
-        .header::before {
-            content: '';
+        .page-shell::before {
+            content: "";
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="stars" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse"><circle cx="12.5" cy="12.5" r="0.8" fill="rgba(100,150,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23stars)"/></svg>');
-            opacity: 0.4;
+            inset: 7px;
+            z-index: 5;
+            pointer-events: none;
+            border: 1px solid rgba(226, 213, 181, 0.07);
+            border-radius: calc(var(--radius-xl) - 7px);
         }
 
-        .header-content {
+        .memorial-header {
             position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            padding: clamp(58px, 9vw, 112px) clamp(20px, 6vw, 72px);
+            text-align: center;
+            background:
+                linear-gradient(180deg, rgba(7, 8, 9, 0.03), rgba(7, 8, 9, 0.48)),
+                radial-gradient(ellipse at 50% 5%, rgba(255, 255, 255, 0.09), transparent 44%),
+                linear-gradient(125deg, #3a3b3f 0%, #1d1e20 36%, #2b2c2f 62%, #151618 100%);
+            border-bottom: 1px solid rgba(226, 213, 181, 0.16);
+        }
+
+        .memorial-header::before {
+            content: "";
+            position: absolute;
+            inset: -20%;
+            z-index: -1;
+            opacity: 0.52;
+            transform: rotate(-2deg) scale(1.08);
+            background:
+                linear-gradient(116deg, transparent 0 21%, rgba(235, 235, 231, 0.11) 22%, rgba(188, 189, 188, 0.035) 23% 26%, transparent 27% 48%, rgba(245, 245, 240, 0.075) 49%, transparent 50% 76%, rgba(220, 220, 216, 0.055) 77%, transparent 78%),
+                linear-gradient(67deg, transparent 0 39%, rgba(255, 255, 255, 0.045) 40%, transparent 41% 69%, rgba(255, 255, 255, 0.035) 70%, transparent 71%);
+            background-size: 760px 520px, 980px 720px;
+            filter: blur(0.2px);
+        }
+
+        .memorial-header::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 24px;
+            width: min(290px, 58vw);
+            height: 1px;
             z-index: 1;
+            transform: translateX(-50%);
+            background: linear-gradient(90deg, transparent, rgba(224, 206, 161, 0.42) 24%, rgba(224, 206, 161, 0.78) 50%, rgba(224, 206, 161, 0.42) 76%, transparent);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .eyebrow {
+            margin: 0 0 13px;
+            color: var(--accent-strong);
+            font-size: clamp(0.74rem, 1.6vw, 0.88rem);
+            font-weight: 650;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
         }
 
         .memorial-title {
-            font-size: 2.8em;
-            margin-bottom: 10px;
-            font-weight: 200;
-            letter-spacing: 3px;
-            color: #ffffff;
-            text-shadow: 0 0 20px rgba(100, 150, 255, 0.3);
+            margin: 0;
+            color: #f2f0e9;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(2.7rem, 8vw, 5.7rem);
+            font-weight: 400;
+            line-height: 0.98;
+            letter-spacing: -0.025em;
+            text-wrap: balance;
+            text-shadow:
+                0 2px 0 rgba(255, 255, 255, 0.07),
+                0 8px 38px rgba(0, 0, 0, 0.52);
         }
 
         .memorial-subtitle {
-            font-size: 1.2em;
-            opacity: 0.8;
+            max-width: 700px;
+            margin: 22px auto 0;
+            color: var(--accent-strong);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(1.08rem, 2.4vw, 1.45rem);
             font-style: italic;
-            color: rgba(100, 150, 255, 0.9);
+            text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
         }
 
         .memorial-dates {
-            margin-top: 15px;
-            font-size: 1em;
-            opacity: 0.7;
-            color: #cccccc;
+            margin: 14px 0 0;
+            color: var(--text-muted);
+            font-size: clamp(0.92rem, 1.8vw, 1.04rem);
         }
 
-        .content {
-            padding: 40px;
-            background: #2d2d2d;
-        }
-
-        .description {
-            text-align: center;
-            margin-bottom: 40px;
-            font-size: 1.1em;
-            line-height: 1.6;
-            color: #b0b0b0;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 30px;
-        }
-
-        .image-item {
+        .main-content {
             position: relative;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            opacity: 0;
-            transform: translateY(50px);
+            padding: clamp(28px, 5vw, 64px);
+            background:
+                linear-gradient(122deg, transparent 0 34%, rgba(255, 255, 255, 0.018) 35%, transparent 36% 72%, rgba(255, 255, 255, 0.012) 73%, transparent 74%),
+                linear-gradient(180deg, rgba(47, 48, 51, 0.7), rgba(25, 26, 28, 0.88));
         }
 
-        .image-item.visible {
+        .intro {
+            max-width: 760px;
+            margin: 0 auto clamp(28px, 5vw, 52px);
+            text-align: center;
+        }
+
+        .intro__text {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: clamp(1rem, 2vw, 1.13rem);
+            text-wrap: pretty;
+        }
+
+        .interaction-hint {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            min-height: 42px;
+            margin: 22px 0 0;
+            padding: 9px 15px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            color: var(--text-subtle);
+            background: rgba(13, 14, 15, 0.42);
+            font-size: 0.9rem;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.025) inset;
+        }
+
+        .interaction-hint::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 10px rgba(196, 173, 120, 0.46);
+        }
+
+        .hint-touch {
+            display: none;
+        }
+
+        .gallery-status {
+            min-height: 1.6em;
+            margin: 0 0 18px;
+            color: var(--text-subtle);
+            font-size: 0.92rem;
+            text-align: center;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+            gap: clamp(16px, 2.5vw, 26px);
+        }
+
+        .gallery-card {
+            position: relative;
+            min-width: 0;
+            overflow: hidden;
+            padding: 0;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            color: inherit;
+            background:
+                linear-gradient(128deg, transparent 0 42%, rgba(255, 255, 255, 0.025) 43%, transparent 44%),
+                linear-gradient(145deg, rgba(54, 55, 59, 0.94), rgba(26, 27, 29, 0.98));
+            box-shadow:
+                0 14px 32px rgba(0, 0, 0, 0.3),
+                0 1px 0 rgba(255, 255, 255, 0.035) inset;
+            cursor: pointer;
+            text-align: left;
+            opacity: 0;
+            transform: translateY(18px);
+            transition:
+                transform 380ms var(--ease),
+                border-color 280ms ease,
+                box-shadow 280ms ease,
+                opacity 500ms var(--ease);
+        }
+
+        .gallery-card.is-visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .image-item:hover {
-            transform: translateY(-10px) scale(1.05);
+        .gallery-card:disabled {
+            cursor: progress;
         }
 
-        .memorial-image {
+        .gallery-card:focus-visible,
+        .icon-button:focus-visible,
+        .mobile-action:focus-visible {
+            outline: none;
+            box-shadow: var(--focus-ring);
+        }
+
+        .gallery-card__media {
+            position: relative;
+            display: grid;
+            place-items: center;
             width: 100%;
-            height: auto;
-            object-fit: cover;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            border: 2px solid rgba(60, 60, 60, 0.5);
-        }
-
-        .image-item:hover .memorial-image {
-            border-color: rgba(100, 150, 255, 0.8);
-            box-shadow: 
-                0 15px 40px rgba(0,0,0,0.5), 
-                0 0 30px rgba(100, 150, 255, 0.6);
-            filter: brightness(1.1);
-        }
-
-        .image-label {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.9));
-            color: white;
-            padding: 20px 15px 15px;
-            font-size: 0.95em;
-            text-align: center;
-            border-radius: 0 0 13px 13px;
-            opacity: 0;
-            transition: all 0.4s ease;
-        }
-
-        .image-item:hover .image-label {
-            opacity: 1;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 30px;
-            color: #888;
-            font-style: italic;
-            border-top: 1px solid rgba(100, 150, 255, 0.1);
-            background: rgba(30, 30, 30, 0.8);
-        }
-
-        /* Modal für vergrößerte Bilder */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(15px);
-            opacity: 0;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .modal.show {
-            opacity: 1;
-        }
-
-        /* Desktop Modal Layout */
-        .modal-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.8);
-            max-width: 90vw;
-            max-height: 90vh;
-            border-radius: 20px;
+            aspect-ratio: 4 / 3;
             overflow: hidden;
-            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            box-shadow: 
-                0 0 60px rgba(100, 150, 255, 0.7),
-                0 0 120px rgba(100, 150, 255, 0.4);
+            background:
+                radial-gradient(circle at 50% 45%, rgba(196, 173, 120, 0.055), transparent 58%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.025), transparent),
+                #111214;
         }
 
-        .modal.show .modal-content {
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-        .modal-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 20px;
-            background: rgba(0, 0, 0, 0.9);
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        /* Desktop Controls */
-        .modal-close {
+        .gallery-card__media::before {
+            content: "";
             position: absolute;
-            top: 20px;
-            right: 25px;
-            color: rgba(100, 150, 255, 0.8);
-            font-size: 32px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.4s ease;
-            background: rgba(0, 0, 0, 0.7);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1001;
+            inset: 0;
+            background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.06) 47%, transparent 64%);
+            transform: translateX(-100%);
+            animation: loading-sheen 1.5s infinite;
         }
 
-        .modal-close:hover {
-            color: rgba(100, 150, 255, 1);
-            background: rgba(0, 0, 0, 0.9);
-            transform: scale(1.15);
-            box-shadow: 0 0 20px rgba(100, 150, 255, 0.6);
-        }
-
-        .modal-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            border: 2px solid rgba(100, 150, 255, 0.5);
-            color: rgba(100, 150, 255, 0.8);
-            width: 60px;
-            height: 100px;
-            font-size: 28px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1001;
-            border-radius: 12px;
-        }
-
-        .modal-prev {
-            left: 15px;
-        }
-
-        .modal-next {
-            right: 15px;
-        }
-
-        .modal-nav:hover {
-            background: rgba(100, 150, 255, 0.2);
-            border-color: rgba(100, 150, 255, 0.9);
-            color: rgba(100, 150, 255, 1);
-            transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 0 20px rgba(100, 150, 255, 0.5);
-        }
-
-        .modal-nav:active {
-            transform: translateY(-50%) scale(0.95);
-        }
-
-        .modal-counter {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: rgba(100, 150, 255, 0.9);
-            padding: 12px 20px;
-            border-radius: 25px;
-            font-size: 16px;
-            border: 1px solid rgba(100, 150, 255, 0.3);
-            z-index: 1001;
-            backdrop-filter: blur(10px);
-        }
-
-        /* Mobile Layout */
-        .mobile .modal-content {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 90px;
-            max-width: 100vw;
-            max-height: calc(100vh - 90px);
-            border-radius: 0;
-            transform: scale(0.95);
-        }
-
-        .mobile .modal.show .modal-content {
-            transform: scale(1);
-        }
-
-        .mobile .modal-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            border-radius: 0;
-            background: rgba(0, 0, 0, 1);
-        }
-
-        /* Mobile Controls verstecken */
-        .mobile .modal-close:not(#modalCloseMobile) {
-            display: none !important;
-        }
-
-        .mobile .modal-nav:not(#modalPrevMobile):not(#modalNextMobile) {
-            display: none !important;
-        }
-
-        .mobile .modal-counter:not(#modalCounterMobile) {
-            display: none !important;
-        }
-
-        /* Mobile Controls Bar */
-        .mobile-controls {
+        .gallery-card.is-loaded .gallery-card__media::before {
             display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(20, 20, 20, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 20px;
-            z-index: 1002;
-            border-top: 2px solid rgba(100, 150, 255, 0.3);
         }
 
-        .mobile .mobile-controls {
+        .gallery-card__image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            opacity: 0;
+            transform: scale(1.015);
+            transition: opacity 420ms ease, transform 650ms var(--ease), filter 300ms ease;
+        }
+
+        .gallery-card.is-loaded .gallery-card__image {
+            opacity: 1;
+        }
+
+        .gallery-card__caption {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            min-height: 54px;
+            padding: 13px 15px;
+            color: var(--text-muted);
+            font-size: 0.92rem;
+            font-weight: 600;
         }
 
-        .mobile-nav-group {
-            display: flex;
-            gap: 20px;
+        .gallery-card__caption::after {
+            content: "↗";
+            color: var(--accent);
+            font-size: 1rem;
+            transition: transform 240ms var(--ease);
         }
 
-        .mobile .modal-nav {
-            position: static;
-            transform: none;
-            width: 55px;
-            height: 55px;
-            font-size: 22px;
-            background: rgba(100, 150, 255, 0.1);
-            border: 2px solid rgba(100, 150, 255, 0.5);
-            border-radius: 12px;
-        }
-
-        .mobile .modal-nav:hover {
-            background: rgba(100, 150, 255, 0.3);
-            transform: none;
-        }
-
-        .mobile .modal-close {
-            position: static;
-            width: 55px;
-            height: 55px;
-            font-size: 22px;
-            background: rgba(220, 53, 69, 0.2);
-            border: 2px solid rgba(220, 53, 69, 0.5);
-            color: rgba(220, 53, 69, 0.8);
-        }
-
-        .mobile .modal-close:hover {
-            background: rgba(220, 53, 69, 0.3);
-            color: rgba(220, 53, 69, 1);
-            transform: none;
-        }
-
-        .mobile .modal-counter {
-            position: static;
-            transform: none;
-            background: transparent;
-            border: none;
-            color: rgba(100, 150, 255, 0.9);
-            padding: 0;
-            font-size: 18px;
-            flex: 1;
+        .empty-state {
+            grid-column: 1 / -1;
+            padding: 30px;
+            border: 1px dashed var(--border-strong);
+            border-radius: var(--radius-lg);
+            color: var(--text-muted);
+            background: rgba(8, 12, 19, 0.28);
             text-align: center;
         }
 
-        /* Wisch-Animationen */
-        .modal-image.swipe-left {
-            transform: translateX(-50px) scale(0.9);
-            opacity: 0.6;
-            filter: blur(2px);
+        .memorial-footer {
+            position: relative;
+            padding: clamp(32px, 5vw, 54px) clamp(20px, 5vw, 56px);
+            border-top: 1px solid rgba(226, 213, 181, 0.14);
+            background:
+                linear-gradient(118deg, transparent 0 44%, rgba(255, 255, 255, 0.018) 45%, transparent 46%),
+                rgba(16, 17, 18, 0.78);
+            text-align: center;
         }
 
-        .modal-image.swipe-right {
-            transform: translateX(50px) scale(0.9);
-            opacity: 0.6;
-            filter: blur(2px);
+        .memorial-footer::before {
+            content: "◆";
+            display: block;
+            width: 120px;
+            margin: 0 auto 20px;
+            color: var(--accent);
+            font-size: 0.56rem;
+            line-height: 1;
+            background: linear-gradient(90deg, rgba(196, 173, 120, 0), rgba(196, 173, 120, 0.45) 35%, transparent 35% 65%, rgba(196, 173, 120, 0.45) 65%, rgba(196, 173, 120, 0));
+            background-position: center;
+            background-size: 100% 1px;
+            background-repeat: no-repeat;
         }
 
-        .modal-image.swipe-back {
-            transform: translateX(0) scale(1);
+        .memorial-footer blockquote {
+            max-width: 780px;
+            margin: 0 auto;
+            color: var(--text-muted);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(1rem, 2.1vw, 1.22rem);
+            font-style: italic;
+        }
+
+        .memorial-footer p {
+            margin: 16px 0 0;
+            color: var(--text-subtle);
+            font-size: 0.92rem;
+            letter-spacing: 0.04em;
+        }
+
+        /* Bildansicht */
+        .lightbox {
+            width: 100vw;
+            max-width: none;
+            height: 100vh;
+            height: 100dvh;
+            max-height: none;
+            margin: 0;
+            padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+            overflow: hidden;
+            border: 0;
+            color: var(--text);
+            background: transparent;
+        }
+
+        .lightbox::backdrop {
+            background: rgba(5, 5, 6, 0.95);
+            backdrop-filter: blur(18px);
+        }
+
+        .lightbox[open] {
+            display: grid;
+            place-items: center;
+        }
+
+        .lightbox__shell {
+            position: relative;
+            display: grid;
+            grid-template-rows: minmax(0, 1fr) auto;
+            width: min(96vw, 1540px);
+            height: min(94dvh, 1040px);
+            overflow: hidden;
+            border: 1px solid rgba(224, 206, 161, 0.24);
+            border-radius: 22px;
+            background: rgba(17, 18, 19, 0.98);
+            box-shadow:
+                0 30px 100px rgba(0, 0, 0, 0.76),
+                0 0 0 1px rgba(255, 255, 255, 0.035) inset;
+            animation: lightbox-in 300ms var(--ease) both;
+        }
+
+        .lightbox__stage {
+            position: relative;
+            display: grid;
+            min-height: 0;
+            place-items: center;
+            overflow: hidden;
+            padding: clamp(12px, 2vw, 28px) clamp(12px, 5vw, 82px);
+            background:
+                radial-gradient(circle at 50% 45%, rgba(196, 173, 120, 0.075), transparent 48%),
+                linear-gradient(122deg, transparent 0 43%, rgba(255, 255, 255, 0.018) 44%, transparent 45%),
+                #0b0c0d;
+            touch-action: pan-y pinch-zoom;
+            user-select: none;
+        }
+
+        .lightbox__image {
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 20px 54px rgba(0, 0, 0, 0.5);
             opacity: 1;
-            filter: blur(0);
+            transform: translate3d(0, 0, 0) scale(1);
+            transition: opacity 180ms ease, transform 220ms var(--ease), filter 180ms ease;
+            will-change: transform, opacity;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            .memorial-title {
-                font-size: 2em;
-                letter-spacing: 1px;
-            }
-            
-            .header {
-                padding: 25px 20px;
-            }
-            
-            .image-grid {
-                grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-                gap: 20px;
-            }
-            
-            .content {
-                padding: 20px;
-            }
-
-            .description {
-                font-size: 1em;
-                padding: 0 10px;
-            }
+        .lightbox__image.is-changing {
+            opacity: 0.18;
+            transform: scale(0.985);
+            filter: blur(2px);
         }
 
-        @media (max-width: 480px) {
-            .memorial-title {
-                font-size: 1.8em;
-            }
-
-            .image-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-                max-width: 350px;
-                margin: 0 auto;
-            }
-
-            .content {
-                padding: 15px;
-            }
+        .lightbox__toolbar {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            align-items: center;
+            gap: 20px;
+            min-height: 74px;
+            padding: 12px 18px;
+            border-top: 1px solid var(--border);
+            background: rgba(31, 32, 34, 0.99);
         }
 
-        /* Scroll Animationen */
-        .image-item {
-            animation-fill-mode: forwards;
+        .lightbox__meta {
+            min-width: 0;
         }
 
-        .image-item:nth-child(1) { animation-delay: 0.1s; }
-        .image-item:nth-child(2) { animation-delay: 0.2s; }
-        .image-item:nth-child(3) { animation-delay: 0.3s; }
-        .image-item:nth-child(4) { animation-delay: 0.4s; }
-        .image-item:nth-child(5) { animation-delay: 0.5s; }
-        .image-item:nth-child(6) { animation-delay: 0.6s; }
+        .lightbox__caption {
+            overflow: hidden;
+            margin: 0;
+            color: var(--text);
+            font-weight: 650;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
 
-        @keyframes fadeInUp {
+        .lightbox__counter {
+            margin: 2px 0 0;
+            color: var(--text-subtle);
+            font-size: 0.86rem;
+        }
+
+        .desktop-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .icon-button,
+        .mobile-action {
+            display: inline-grid;
+            flex: 0 0 auto;
+            place-items: center;
+            min-width: 48px;
+            min-height: 48px;
+            padding: 0;
+            border: 1px solid var(--border-strong);
+            border-radius: 999px;
+            color: var(--accent-strong);
+            background: rgba(31, 32, 34, 0.82);
+            cursor: pointer;
+            transition: transform 220ms var(--ease), background 220ms ease, border-color 220ms ease;
+        }
+
+        .icon-button:disabled,
+        .mobile-action:disabled {
+            opacity: 0.38;
+            cursor: not-allowed;
+        }
+
+        .lightbox__close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 5;
+            color: var(--text);
+            background: rgba(12, 13, 14, 0.84);
+        }
+
+        .lightbox__nav {
+            position: absolute;
+            top: 50%;
+            z-index: 4;
+            width: 58px;
+            height: 58px;
+            transform: translateY(-50%);
+            font-size: 1.7rem;
+        }
+
+        .lightbox__prev {
+            left: 16px;
+        }
+
+        .lightbox__next {
+            right: 16px;
+        }
+
+        .mobile-actions {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .mobile-action {
+            min-width: 54px;
+            min-height: 54px;
+            border-radius: 15px;
+            font-size: 1.3rem;
+        }
+
+        .mobile-action--close {
+            color: var(--danger);
+            border-color: rgba(255, 155, 166, 0.35);
+            background: rgba(115, 34, 45, 0.16);
+        }
+
+        @keyframes loading-sheen {
+            to { transform: translateX(100%); }
+        }
+
+        @keyframes lightbox-in {
+            from {
+                opacity: 0;
+                transform: scale(0.965) translateY(10px);
+            }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: scale(1) translateY(0);
             }
         }
 
-        /* Klick Animationen */
-        .image-item.clicked .memorial-image {
-            box-shadow: 
-                0 0 40px rgba(100, 150, 255, 1),
-                0 0 80px rgba(100, 150, 255, 0.7),
-                0 15px 40px rgba(0,0,0,0.5);
-            border-color: rgba(100, 150, 255, 1);
-            transform: scale(1.03);
+        @media (hover: hover) and (pointer: fine) {
+            .gallery-card:not(:disabled):hover {
+                z-index: 1;
+                transform: translateY(-6px);
+                border-color: var(--border-strong);
+                box-shadow: 0 20px 42px rgba(0, 0, 0, 0.38);
+            }
+
+            .gallery-card:not(:disabled):hover .gallery-card__image {
+                transform: scale(1.035);
+                filter: brightness(1.05);
+            }
+
+            .gallery-card:not(:disabled):hover .gallery-card__caption::after {
+                transform: translate(2px, -2px);
+            }
+
+            .icon-button:not(:disabled):hover,
+            .mobile-action:not(:disabled):hover {
+                transform: scale(1.06);
+                border-color: rgba(224, 206, 161, 0.72);
+                background: rgba(91, 80, 55, 0.42);
+            }
         }
 
-        /* Scrollbar styling */
-        ::-webkit-scrollbar {
-            width: 10px;
+        @media (hover: none), (pointer: coarse) {
+            .hint-pointer {
+                display: none;
+            }
+
+            .hint-touch {
+                display: inline;
+            }
+
+            .lightbox {
+                padding: 0;
+            }
+
+            .lightbox__shell {
+                width: 100vw;
+                height: 100dvh;
+                border: 0;
+                border-radius: 0;
+            }
+
+            .lightbox__stage {
+                padding: max(12px, env(safe-area-inset-top)) 8px 10px;
+            }
+
+            .lightbox__nav,
+            .lightbox__close,
+            .desktop-actions {
+                display: none;
+            }
+
+            .lightbox__toolbar {
+                grid-template-columns: minmax(0, 1fr) auto;
+                min-height: calc(78px + env(safe-area-inset-bottom));
+                padding: 10px max(12px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+            }
+
+            .mobile-actions {
+                display: flex;
+            }
         }
 
-        ::-webkit-scrollbar-track {
-            background: rgba(40, 40, 40, 0.5);
-            border-radius: 5px;
+        @media (max-width: 720px) {
+            .page-shell {
+                width: min(calc(100% - 18px), var(--content-width));
+                margin: 9px auto;
+                border-radius: 18px;
+            }
+
+            .memorial-header {
+                padding-inline: 18px;
+            }
+
+            .main-content {
+                padding-inline: 14px;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .gallery-card {
+                border-radius: 14px;
+            }
+
+            .gallery-card__media {
+                aspect-ratio: 1 / 1;
+            }
+
+            .gallery-card__caption {
+                min-height: 48px;
+                padding: 10px 11px;
+                font-size: 0.82rem;
+            }
+
+            .memorial-footer {
+                padding-inline: 20px;
+            }
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: rgba(100, 150, 255, 0.5);
-            border-radius: 5px;
+        @media (max-width: 390px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-card__media {
+                aspect-ratio: 4 / 3;
+            }
+
+            .lightbox__toolbar {
+                gap: 8px;
+            }
+
+            .mobile-action {
+                min-width: 48px;
+                min-height: 48px;
+            }
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(100, 150, 255, 0.7);
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (prefers-contrast: more) {
+            :root {
+                --border: rgba(240, 237, 228, 0.42);
+                --border-strong: rgba(234, 219, 183, 0.8);
+                --text-muted: #e3dfd6;
+                --text-subtle: #cbc7be;
+            }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="header-content">
-                <h1 class="memorial-title">Alper Cinar</h1>
-                <p class="memorial-subtitle">Für immer in unseren Herzen</p>
-                <p class="memorial-dates">Ein Leben voller kostbarer Erinnerungen</p>
-            </div>
-        </div>
+    <!-- Gestaltung: Anthrazit und dezente Marmoradern, angelehnt an Alpers Grabmal. -->
+    <a class="skip-link" href="#gallery">Direkt zur Galerie</a>
 
-        <div class="content">
-            <div class="description">
-                Diese Galerie zeigt besondere Erinnerungen an Alper Cinar. 
-                Klicken Sie auf ein Bild, um es vergrößert zu betrachten.
-            </div>
+    <div class="page-shell">
+        <header class="memorial-header">
+            <p class="eyebrow">Zum Gedenken an</p>
+            <h1 class="memorial-title">Alper Cinar</h1>
+            <p class="memorial-subtitle">Für immer in unseren Herzen</p>
+            <p class="memorial-dates">Ein Leben voller kostbarer Erinnerungen</p>
+        </header>
 
-            <div class="click-hint">
-                Klicken Sie auf die Bilder für eine größere Ansicht
-            </div>
+        <main class="main-content" id="main-content">
+            <section class="intro" aria-labelledby="gallery-heading">
+                <h2 id="gallery-heading" class="visually-hidden">Erinnerungsgalerie</h2>
+                <p class="intro__text">
+                    Diese Galerie bewahrt besondere Erinnerungen an Alper Cinar.
+                    Jedes Bild kann in einer ruhigen, vergrößerten Ansicht betrachtet werden.
+                </p>
+                <p class="interaction-hint">
+                    <span class="hint-pointer">Bild anklicken · Pfeiltasten zum Wechseln · Esc zum Schließen</span>
+                    <span class="hint-touch">Bild antippen · Nach links oder rechts wischen</span>
+                </p>
+            </section>
 
-            <div class="image-grid" id="image-grid">
-                <!-- Images will be dynamically added here -->
-            </div>
-        </div>
+            <p class="gallery-status" id="gallery-status" role="status" aria-live="polite">
+                Bilder werden geladen …
+            </p>
 
-        <div class="footer">
-            "Die kostbarsten Schätze sind die Erinnerungen, die wir in unseren Herzen tragen."<br>
-            <br>Zum ewigen Gedenken an Alper Cinar
-        </div>
+            <section class="gallery" id="gallery" aria-label="Erinnerungsfotos von Alper Cinar"></section>
+        </main>
+
+        <footer class="memorial-footer">
+            <blockquote>
+                „Die kostbarsten Schätze sind die Erinnerungen, die wir in unseren Herzen tragen.“
+            </blockquote>
+            <p>Zum ewigen Gedenken an Alper Cinar</p>
+        </footer>
     </div>
 
-    <!-- Modal for enlarged images -->
-    <div id="imageModal" class="modal">
-        <span class="modal-close">&times;</span>
-        <div class="modal-content">
-            <img class="modal-image" id="modalImg">
-            <button class="modal-nav modal-prev" id="modalPrev">‹</button>
-            <button class="modal-nav modal-next" id="modalNext">›</button>
-            <div class="modal-counter" id="modalCounter">1 / 22</div>
-        </div>
-        <div class="mobile-controls">
-            <div class="mobile-nav-group">
-                <button class="modal-nav modal-prev" id="modalPrevMobile">‹</button>
-                <button class="modal-nav modal-next" id="modalNextMobile">›</button>
+    <dialog
+        class="lightbox"
+        id="lightbox"
+        aria-labelledby="lightbox-caption"
+        aria-describedby="lightbox-counter"
+    >
+        <div class="lightbox__shell">
+            <div class="lightbox__stage" id="lightbox-stage">
+                <img class="lightbox__image" id="lightbox-image" alt="">
+
+                <button class="icon-button lightbox__close" type="button" data-action="close" aria-label="Bildansicht schließen">
+                    <span aria-hidden="true">×</span>
+                </button>
+
+                <button class="icon-button lightbox__nav lightbox__prev" type="button" data-action="previous" aria-label="Vorheriges Bild">
+                    <span aria-hidden="true">‹</span>
+                </button>
+
+                <button class="icon-button lightbox__nav lightbox__next" type="button" data-action="next" aria-label="Nächstes Bild">
+                    <span aria-hidden="true">›</span>
+                </button>
             </div>
-            <div class="modal-counter" id="modalCounterMobile">1 / 22</div>
-            <span class="modal-close" id="modalCloseMobile">&times;</span>
+
+            <div class="lightbox__toolbar">
+                <div class="lightbox__meta">
+                    <p class="lightbox__caption" id="lightbox-caption">Erinnerung</p>
+                    <p class="lightbox__counter" id="lightbox-counter" aria-live="polite">1 von 22</p>
+                </div>
+
+                <div class="desktop-actions" aria-label="Bildsteuerung">
+                    <button class="icon-button" type="button" data-action="previous" aria-label="Vorheriges Bild">
+                        <span aria-hidden="true">‹</span>
+                    </button>
+                    <button class="icon-button" type="button" data-action="next" aria-label="Nächstes Bild">
+                        <span aria-hidden="true">›</span>
+                    </button>
+                </div>
+
+                <div class="mobile-actions" aria-label="Touch-Steuerung">
+                    <button class="mobile-action" type="button" data-action="previous" aria-label="Vorheriges Bild">
+                        <span aria-hidden="true">‹</span>
+                    </button>
+                    <button class="mobile-action" type="button" data-action="next" aria-label="Nächstes Bild">
+                        <span aria-hidden="true">›</span>
+                    </button>
+                    <button class="mobile-action mobile-action--close" type="button" data-action="close" aria-label="Bildansicht schließen">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
+    </dialog>
+
+    <template id="gallery-card-template">
+        <button class="gallery-card" type="button" disabled>
+            <span class="gallery-card__media">
+                <img class="gallery-card__image" src="" alt="" decoding="async">
+            </span>
+            <span class="gallery-card__caption"></span>
+        </button>
+    </template>
 
     <script>
-        let imageCount = 0;
-        const maxImages = 22;
-        let imageGallery = [];
-        let currentImageIndex = 0;
-        let isMobile = false;
+        (() => {
+            'use strict';
 
-        // Device Detection
-        function detectDevice() {
-            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-            const isSmallScreen = window.innerWidth <= 768;
-            isMobile = isTouchDevice && isSmallScreen;
-            
-            if (isMobile) {
-                document.body.classList.add('mobile');
-            } else {
-                document.body.classList.remove('mobile');
+            const IMAGE_COUNT = 22;
+            const IMAGE_PREFIX = 'bild_';
+            const IMAGE_EXTENSION = '.jpg';
+
+            const gallery = document.getElementById('gallery');
+            const galleryStatus = document.getElementById('gallery-status');
+            const cardTemplate = document.getElementById('gallery-card-template');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxStage = document.getElementById('lightbox-stage');
+            const lightboxImage = document.getElementById('lightbox-image');
+            const lightboxCaption = document.getElementById('lightbox-caption');
+            const lightboxCounter = document.getElementById('lightbox-counter');
+            const actionButtons = [...document.querySelectorAll('[data-action]')];
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+            const state = {
+                entries: [],
+                currentIndex: 0,
+                loadedCount: 0,
+                failedCount: 0,
+                settledCount: 0,
+                isChanging: false,
+                previousFocus: null,
+                drag: {
+                    active: false,
+                    pointerId: null,
+                    startX: 0,
+                    startY: 0,
+                    deltaX: 0,
+                    horizontal: false
+                }
+            };
+
+            function imageFileName(number) {
+                return `${IMAGE_PREFIX}${String(number).padStart(3, '0')}${IMAGE_EXTENSION}`;
             }
-        }
 
-        function loadFromFolder() {
-            // Lade alle Bilder von bild_001.jpg bis bild_022.jpg
-            const imageNames = [];
-            for (let i = 1; i <= 22; i++) {
-                const fileName = `bild_${i.toString().padStart(3, '0')}.jpg`;
-                imageNames.push(fileName);
+            function imageLabel(number) {
+                return `Erinnerung ${number}`;
             }
 
-            console.log('Lade Bilder:', imageNames);
-
-            imageNames.forEach((imageName, index) => {
-                const img = new Image();
-                img.onload = function() {
-                    console.log('Erfolgreich geladen:', imageName);
-                    imageGallery.push({
-                        src: imageName,
-                        name: `Alper Cinar - ${index + 1}`
-                    });
-                    
-                    setTimeout(() => {
-                        addImage(imageName, `Alper Cinar - ${index + 1}`);
-                    }, index * 100);
-                };
-                
-                img.onerror = function() {
-                    console.log('Fehler beim Laden:', imageName);
-                    // Trotzdem hinzufügen für Tests
-                    imageGallery.push({
-                        src: imageName,
-                        name: `Alper Cinar - ${index + 1}`
-                    });
-                    
-                    setTimeout(() => {
-                        addImage(imageName, `Alper Cinar - ${index + 1}`);
-                    }, index * 100);
-                };
-                
-                img.src = imageName;
-            });
-        }
-
-        function addImage(imageSrc, fileName) {
-            if (imageCount >= maxImages) return;
-
-            imageCount++;
-            const grid = document.getElementById('image-grid');
-            
-            const imageItem = document.createElement('div');
-            imageItem.className = 'image-item';
-            
-            imageItem.innerHTML = `
-                <img class="memorial-image" src="${imageSrc}" alt="${fileName}">
-                <div class="image-label">${fileName}</div>
-            `;
-
-            const img = imageItem.querySelector('.memorial-image');
-            const imageIndex = imageCount - 1;
-            
-            img.addEventListener('click', function(e) {
-                // Klick-Animation
-                imageItem.classList.add('clicked');
-                
-                setTimeout(() => {
-                    openModal(imageIndex);
-                    imageItem.classList.remove('clicked');
-                }, 400);
-            });
-
-            grid.appendChild(imageItem);
-        }
-
-        function openModal(imageIndex) {
-            currentImageIndex = imageIndex;
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImg');
-            const modalContent = modal.querySelector('.modal-content');
-            
-            if (imageGallery[currentImageIndex]) {
-                modal.style.display = 'block';
-                modalImg.src = imageGallery[currentImageIndex].src;
-                updateModalCounter();
-                
-                // Mobiler Glow-Effekt direkt hinzufügen
-                if (isMobile) {
-                    modalContent.style.border = '4px solid rgba(100, 150, 255, 0.9)';
-                    modalContent.style.boxShadow = `
-                        0 0 40px rgba(100, 150, 255, 1),
-                        0 0 80px rgba(100, 150, 255, 0.8),
-                        0 0 120px rgba(100, 150, 255, 0.6)`;
-                    modalContent.style.animation = 'handy_glow_animation 2s ease-in-out infinite alternate';
-                    
-                    // Zusätzlicher Glow-Effekt
-                    setInterval(() => {
-                        if (modal.style.display === 'block' && isMobile) {
-                            const intensity = Math.sin(Date.now() * 0.003) * 0.5 + 0.5;
-                            modalContent.style.filter = `brightness(${1 + intensity * 0.3})`;
-                            modalContent.style.borderColor = `rgba(100, 150, 255, ${0.7 + intensity * 0.3})`;
-                        }
-                    }, 100);
-                }
-                
-                setTimeout(() => {
-                    modal.classList.add('show');
-                }, 50);
+            function usableEntries() {
+                return state.entries.filter((entry) => entry.status !== 'failed');
             }
-        }
 
-        function updateModalCounter() {
-            const counterText = `${currentImageIndex + 1} / ${imageGallery.length}`;
-            document.getElementById('modalCounter').textContent = counterText;
-            document.getElementById('modalCounterMobile').textContent = counterText;
-        }
-
-        function showNextImage() {
-            const modalImg = document.getElementById('modalImg');
-            
-            modalImg.classList.add('swipe-left');
-            
-            setTimeout(() => {
-                currentImageIndex = (currentImageIndex + 1) % imageGallery.length;
-                modalImg.src = imageGallery[currentImageIndex].src;
-                updateModalCounter();
-                
-                modalImg.classList.remove('swipe-left');
-                modalImg.classList.add('swipe-back');
-                
-                setTimeout(() => {
-                    modalImg.classList.remove('swipe-back');
-                }, 400);
-            }, 300);
-        }
-
-        function showPrevImage() {
-            const modalImg = document.getElementById('modalImg');
-            
-            modalImg.classList.add('swipe-right');
-            
-            setTimeout(() => {
-                currentImageIndex = (currentImageIndex - 1 + imageGallery.length) % imageGallery.length;
-                modalImg.src = imageGallery[currentImageIndex].src;
-                updateModalCounter();
-                
-                modalImg.classList.remove('swipe-right');
-                modalImg.classList.add('swipe-back');
-                
-                setTimeout(() => {
-                    modalImg.classList.remove('swipe-back');
-                }, 400);
-            }, 300);
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            modal.classList.remove('show');
-            
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 500);
-        }
-
-        function setupEventListeners() {
-            // Close Buttons
-            document.querySelector('.modal-close').onclick = closeModal;
-            document.getElementById('modalCloseMobile').onclick = closeModal;
-            
-            // Navigation Buttons
-            document.getElementById('modalPrev').onclick = showPrevImage;
-            document.getElementById('modalNext').onclick = showNextImage;
-            document.getElementById('modalPrevMobile').onclick = showPrevImage;
-            document.getElementById('modalNextMobile').onclick = showNextImage;
-
-            // Keyboard Navigation
-            document.addEventListener('keydown', function(event) {
-                const modal = document.getElementById('imageModal');
-                if (modal.style.display === 'block') {
-                    switch(event.key) {
-                        case 'Escape':
-                            closeModal();
-                            break;
-                        case 'ArrowLeft':
-                            showPrevImage();
-                            break;
-                        case 'ArrowRight':
-                            showNextImage();
-                            break;
-                    }
-                }
-            });
-
-            // Verbesserte Touch/Swipe Navigation mit flüssigen Animationen
-            let startX = 0;
-            let startY = 0;
-            let currentX = 0;
-            let isSwipping = false;
-            let swipeThreshold = 60;
-
-            const modalImg = document.getElementById('modalImg');
-
-            modalImg.addEventListener('touchstart', function(e) {
-                if (isMobile) {
-                    startX = e.touches[0].clientX;
-                    startY = e.touches[0].clientY;
-                    isSwipping = false;
-                    modalImg.classList.add('live-swipe');
-                }
-            }, { passive: true });
-
-            modalImg.addEventListener('touchmove', function(e) {
-                if (!isMobile || !startX) return;
-                
-                currentX = e.touches[0].clientX;
-                const deltaX = currentX - startX;
-                const deltaY = e.touches[0].clientY - startY;
-                
-                if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 15) {
-                    isSwipping = true;
-                    e.preventDefault();
-                    
-                    // Flüssige Live-Animation
-                    const progress = Math.min(Math.abs(deltaX) / window.innerWidth, 0.8);
-                    const opacity = 1 - (progress * 0.7);
-                    const scale = 1 - (progress * 0.2);
-                    const blur = progress * 8;
-                    const translateX = deltaX * 0.6;
-                    
-                    modalImg.style.transform = `translateX(${translateX}px) scale(${scale})`;
-                    modalImg.style.opacity = opacity;
-                    modalImg.style.filter = `blur(${blur}px)`;
-                }
-            }, { passive: false });
-
-            modalImg.addEventListener('touchend', function(e) {
-                if (!isMobile || !startX || !isSwipping) {
-                    modalImg.classList.remove('live-swipe');
-                    modalImg.style.transform = '';
-                    modalImg.style.opacity = '';
-                    modalImg.style.filter = '';
+            function updateGalleryStatus() {
+                if (state.settledCount < IMAGE_COUNT) {
+                    galleryStatus.textContent = `${state.loadedCount} von ${IMAGE_COUNT} Bildern geladen …`;
                     return;
                 }
-                
-                const endX = e.changedTouches[0].clientX;
-                const deltaX = startX - endX;
-                
-                modalImg.classList.remove('live-swipe');
-                
-                if (Math.abs(deltaX) > swipeThreshold) {
-                    if (deltaX > 0) {
-                        // Swipe links = nächstes Bild
-                        modalImg.classList.add('swipe-left');
-                        setTimeout(() => {
-                            currentImageIndex = (currentImageIndex + 1) % imageGallery.length;
-                            modalImg.src = imageGallery[currentImageIndex].src;
-                            updateModalCounter();
-                            
-                            modalImg.classList.remove('swipe-left');
-                            modalImg.classList.add('swipe-back');
-                            modalImg.style.transform = '';
-                            modalImg.style.opacity = '';
-                            modalImg.style.filter = '';
-                            
-                            setTimeout(() => {
-                                modalImg.classList.remove('swipe-back');
-                            }, 400);
-                        }, 200);
-                    } else {
-                        // Swipe rechts = vorheriges Bild
-                        modalImg.classList.add('swipe-right');
-                        setTimeout(() => {
-                            currentImageIndex = (currentImageIndex - 1 + imageGallery.length) % imageGallery.length;
-                            modalImg.src = imageGallery[currentImageIndex].src;
-                            updateModalCounter();
-                            
-                            modalImg.classList.remove('swipe-right');
-                            modalImg.classList.add('swipe-back');
-                            modalImg.style.transform = '';
-                            modalImg.style.opacity = '';
-                            modalImg.style.filter = '';
-                            
-                            setTimeout(() => {
-                                modalImg.classList.remove('swipe-back');
-                            }, 400);
-                        }, 200);
-                    }
-                } else {
-                    // Snap zurück
-                    modalImg.style.transform = 'translateX(0) scale(1)';
-                    modalImg.style.opacity = '1';
-                    modalImg.style.filter = 'blur(0)';
-                    
-                    setTimeout(() => {
-                        modalImg.style.transform = '';
-                        modalImg.style.opacity = '';
-                        modalImg.style.filter = '';
-                    }, 300);
-                }
-                
-                startX = 0;
-                startY = 0;
-                isSwipping = false;
-            }, { passive: true });
 
-            // Click outside to close
-            window.onclick = function(event) {
-                const modal = document.getElementById('imageModal');
-                if (event.target == modal && !isMobile) {
-                    closeModal();
+                if (state.loadedCount === 0) {
+                    galleryStatus.textContent = 'Es konnten keine Bilder geladen werden.';
+                    gallery.insertAdjacentHTML(
+                        'beforeend',
+                        '<p class="empty-state">Bitte legen Sie die Bilddateien bild_001.jpg bis bild_022.jpg in denselben Ordner wie diese HTML-Datei.</p>'
+                    );
+                    return;
+                }
+
+                if (state.failedCount > 0) {
+                    galleryStatus.textContent = `${state.loadedCount} Bilder verfügbar · ${state.failedCount} Datei${state.failedCount === 1 ? '' : 'en'} nicht gefunden`;
+                    return;
+                }
+
+                galleryStatus.textContent = `${state.loadedCount} Erinnerungsbilder`;
+            }
+
+            function revealCard(card, order) {
+                const delay = reduceMotion.matches ? 0 : Math.min(order * 55, 500);
+                window.setTimeout(() => card.classList.add('is-visible'), delay);
+            }
+
+            function createGallery() {
+                const fragment = document.createDocumentFragment();
+
+                for (let index = 0; index < IMAGE_COUNT; index += 1) {
+                    const number = index + 1;
+                    const fileName = imageFileName(number);
+                    const card = cardTemplate.content.firstElementChild.cloneNode(true);
+                    const image = card.querySelector('.gallery-card__image');
+                    const caption = card.querySelector('.gallery-card__caption');
+
+                    const entry = {
+                        number,
+                        fileName,
+                        label: imageLabel(number),
+                        status: 'pending',
+                        card,
+                        image
+                    };
+
+                    card.dataset.index = String(index);
+                    card.setAttribute('aria-label', `${entry.label} vergrößert öffnen`);
+                    caption.textContent = entry.label;
+
+                    image.alt = `Erinnerungsfoto ${number} von Alper Cinar`;
+                    image.loading = number <= 6 ? 'eager' : 'lazy';
+                    if (number === 1) {
+                        image.fetchPriority = 'high';
+                    }
+
+                    image.addEventListener('load', () => {
+                        if (entry.status !== 'pending') return;
+                        entry.status = 'loaded';
+                        state.loadedCount += 1;
+                        state.settledCount += 1;
+                        card.disabled = false;
+                        card.classList.add('is-loaded');
+                        updateGalleryStatus();
+                    }, { once: true });
+
+                    image.addEventListener('error', () => {
+                        if (entry.status !== 'pending') return;
+                        entry.status = 'failed';
+                        state.failedCount += 1;
+                        state.settledCount += 1;
+                        card.hidden = true;
+                        updateGalleryStatus();
+                    }, { once: true });
+
+                    card.addEventListener('click', () => openLightbox(index));
+                    image.src = fileName;
+
+                    state.entries.push(entry);
+                    fragment.appendChild(card);
+                    revealCard(card, index);
+                }
+
+                gallery.appendChild(fragment);
+            }
+
+            function getNextUsableIndex(startIndex, direction) {
+                if (!state.entries.length) return -1;
+
+                for (let step = 1; step <= state.entries.length; step += 1) {
+                    const candidate = (startIndex + direction * step + state.entries.length) % state.entries.length;
+                    if (state.entries[candidate].status !== 'failed') {
+                        return candidate;
+                    }
+                }
+
+                return -1;
+            }
+
+            function getVisiblePosition(index) {
+                const entries = usableEntries();
+                const currentEntry = state.entries[index];
+                return entries.findIndex((entry) => entry === currentEntry) + 1;
+            }
+
+            function setNavigationState() {
+                const disableNavigation = usableEntries().length <= 1;
+                actionButtons
+                    .filter((button) => button.dataset.action === 'previous' || button.dataset.action === 'next')
+                    .forEach((button) => {
+                        button.disabled = disableNavigation;
+                    });
+            }
+
+            function renderCurrentImage() {
+                const entry = state.entries[state.currentIndex];
+                if (!entry || entry.status === 'failed') return;
+
+                lightboxImage.src = entry.fileName;
+                lightboxImage.alt = `Vergrößertes Erinnerungsfoto ${entry.number} von Alper Cinar`;
+                lightboxCaption.textContent = entry.label;
+                lightboxCounter.textContent = `${getVisiblePosition(state.currentIndex)} von ${usableEntries().length}`;
+                setNavigationState();
+                preloadAdjacentImages();
+            }
+
+            function preloadAdjacentImages() {
+                [-1, 1].forEach((direction) => {
+                    const index = getNextUsableIndex(state.currentIndex, direction);
+                    if (index >= 0) {
+                        const preloader = new Image();
+                        preloader.src = state.entries[index].fileName;
+                    }
+                });
+            }
+
+            function openLightbox(index) {
+                const entry = state.entries[index];
+                if (!entry || entry.status !== 'loaded') return;
+
+                state.currentIndex = index;
+                state.previousFocus = document.activeElement;
+                renderCurrentImage();
+
+                if (typeof lightbox.showModal === 'function') {
+                    lightbox.showModal();
+                } else {
+                    lightbox.setAttribute('open', '');
                 }
             }
 
-            // Resize Handler
-            window.addEventListener('resize', detectDevice);
-        }
+            function closeLightbox() {
+                resetDrag();
 
-        function setupScrollAnimations() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
+                if (typeof lightbox.close === 'function' && lightbox.open) {
+                    lightbox.close();
+                } else {
+                    lightbox.removeAttribute('open');
+                    restoreFocus();
+                }
+            }
+
+            function restoreFocus() {
+                if (state.previousFocus instanceof HTMLElement) {
+                    state.previousFocus.focus({ preventScroll: true });
+                }
+                state.previousFocus = null;
+            }
+
+            function changeImage(direction) {
+                if (state.isChanging || usableEntries().length <= 1) return;
+
+                const nextIndex = getNextUsableIndex(state.currentIndex, direction);
+                if (nextIndex < 0 || nextIndex === state.currentIndex) return;
+
+                state.isChanging = true;
+                lightboxImage.classList.add('is-changing');
+
+                const delay = reduceMotion.matches ? 0 : 130;
+                window.setTimeout(() => {
+                    state.currentIndex = nextIndex;
+                    renderCurrentImage();
+                    resetDrag();
+                    lightboxImage.classList.remove('is-changing');
+
+                    window.setTimeout(() => {
+                        state.isChanging = false;
+                    }, reduceMotion.matches ? 0 : 190);
+                }, delay);
+            }
+
+            function markCurrentImageAsFailed() {
+                const entry = state.entries[state.currentIndex];
+                if (!entry || entry.status === 'failed') return;
+
+                const previousStatus = entry.status;
+                entry.status = 'failed';
+                entry.card.hidden = true;
+                state.failedCount += 1;
+
+                if (previousStatus === 'loaded' && state.loadedCount > 0) {
+                    state.loadedCount -= 1;
+                } else if (previousStatus === 'pending') {
+                    state.settledCount += 1;
+                }
+                updateGalleryStatus();
+
+                const nextIndex = getNextUsableIndex(state.currentIndex, 1);
+                if (nextIndex < 0) {
+                    closeLightbox();
+                    return;
+                }
+
+                state.currentIndex = nextIndex;
+                renderCurrentImage();
+            }
+
+            function resetDrag() {
+                state.drag.active = false;
+                state.drag.pointerId = null;
+                state.drag.deltaX = 0;
+                state.drag.horizontal = false;
+                lightboxImage.style.removeProperty('transform');
+                lightboxImage.style.removeProperty('opacity');
+                lightboxImage.style.removeProperty('transition');
+            }
+
+            function startDrag(event) {
+                if (event.pointerType === 'mouse' || usableEntries().length <= 1) return;
+
+                state.drag.active = true;
+                state.drag.pointerId = event.pointerId;
+                state.drag.startX = event.clientX;
+                state.drag.startY = event.clientY;
+                state.drag.deltaX = 0;
+                state.drag.horizontal = false;
+
+                lightboxStage.setPointerCapture?.(event.pointerId);
+                lightboxImage.style.transition = 'none';
+            }
+
+            function moveDrag(event) {
+                if (!state.drag.active || event.pointerId !== state.drag.pointerId) return;
+
+                const deltaX = event.clientX - state.drag.startX;
+                const deltaY = event.clientY - state.drag.startY;
+
+                if (!state.drag.horizontal) {
+                    if (Math.abs(deltaX) < 12) return;
+                    if (Math.abs(deltaY) > Math.abs(deltaX)) {
+                        resetDrag();
+                        return;
                     }
-                });
-            }, {
-                threshold: 0.1,
-                rootMargin: '50px'
+                    state.drag.horizontal = true;
+                }
+
+                state.drag.deltaX = deltaX;
+                const stageWidth = Math.max(lightboxStage.clientWidth, 1);
+                const progress = Math.min(Math.abs(deltaX) / stageWidth, 0.55);
+                const translated = deltaX * 0.72;
+                const scale = 1 - progress * 0.08;
+
+                lightboxImage.style.transform = `translate3d(${translated}px, 0, 0) scale(${scale})`;
+                lightboxImage.style.opacity = String(1 - progress * 0.48);
+            }
+
+            function endDrag(event) {
+                if (!state.drag.active || event.pointerId !== state.drag.pointerId) return;
+
+                const threshold = Math.min(110, Math.max(58, lightboxStage.clientWidth * 0.13));
+                const deltaX = state.drag.deltaX;
+
+                lightboxImage.style.transition = '';
+
+                if (state.drag.horizontal && Math.abs(deltaX) >= threshold) {
+                    const direction = deltaX < 0 ? 1 : -1;
+                    resetDrag();
+                    changeImage(direction);
+                    return;
+                }
+
+                resetDrag();
+            }
+
+            function handleAction(action) {
+                if (action === 'close') closeLightbox();
+                if (action === 'previous') changeImage(-1);
+                if (action === 'next') changeImage(1);
+            }
+
+            actionButtons.forEach((button) => {
+                button.addEventListener('click', () => handleAction(button.dataset.action));
             });
 
-            document.querySelectorAll('.image-item').forEach(item => {
-                observer.observe(item);
+            lightbox.addEventListener('cancel', (event) => {
+                event.preventDefault();
+                closeLightbox();
             });
-        }
 
-        // Initialization
-        window.addEventListener('load', function() {
-            detectDevice();
-            setupEventListeners();
-            loadFromFolder();
-            
-            setTimeout(() => {
-                setupScrollAnimations();
-            }, 1500);
-        });
+            lightbox.addEventListener('close', restoreFocus);
+
+            lightbox.addEventListener('click', (event) => {
+                if (event.target === lightbox) closeLightbox();
+            });
+
+            lightbox.addEventListener('keydown', (event) => {
+                if (event.key === 'ArrowLeft') {
+                    event.preventDefault();
+                    changeImage(-1);
+                } else if (event.key === 'ArrowRight') {
+                    event.preventDefault();
+                    changeImage(1);
+                } else if (event.key === 'Home') {
+                    event.preventDefault();
+                    const firstIndex = state.entries.findIndex((entry) => entry.status !== 'failed');
+                    if (firstIndex >= 0) {
+                        state.currentIndex = firstIndex;
+                        renderCurrentImage();
+                    }
+                } else if (event.key === 'End') {
+                    event.preventDefault();
+                    let lastIndex = -1;
+                    for (let index = state.entries.length - 1; index >= 0; index -= 1) {
+                        if (state.entries[index].status !== 'failed') {
+                            lastIndex = index;
+                            break;
+                        }
+                    }
+                    if (lastIndex >= 0) {
+                        state.currentIndex = lastIndex;
+                        renderCurrentImage();
+                    }
+                }
+            });
+
+            lightboxImage.addEventListener('error', markCurrentImageAsFailed);
+            lightboxStage.addEventListener('pointerdown', startDrag);
+            lightboxStage.addEventListener('pointermove', moveDrag);
+            lightboxStage.addEventListener('pointerup', endDrag);
+            lightboxStage.addEventListener('pointercancel', resetDrag);
+
+            createGallery();
+        })();
     </script>
 </body>
 </html>

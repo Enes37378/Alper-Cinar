@@ -159,7 +159,6 @@
                 var(--shadow-xl),
                 0 0 0 1px rgba(0, 0, 0, 0.66) inset,
                 0 0 0 7px rgba(255, 255, 255, 0.011) inset;
-            backdrop-filter: blur(18px);
         }
 
         /* Hero – abstrahiert die Form und Materialität des Grabmals,
@@ -168,7 +167,7 @@
             position: relative;
             isolation: isolate;
             display: grid;
-            min-height: clamp(590px, 79svh, 860px);
+            min-height: clamp(540px, 72svh, 760px);
             place-items: center;
             overflow: hidden;
             padding: clamp(72px, 10vw, 132px) clamp(18px, 5vw, 72px) clamp(68px, 8vw, 100px);
@@ -486,6 +485,7 @@
                 box-shadow 320ms ease;
             content-visibility: auto;
             contain-intrinsic-size: 360px 270px;
+            contain: layout paint style;
         }
 
         .gallery-card.is-visible {
@@ -506,28 +506,34 @@
             overflow: hidden;
             isolation: isolate;
             background:
-                radial-gradient(circle at 50% 50%, rgba(199, 170, 112, 0.05), transparent 58%),
+                radial-gradient(circle at 50% 50%, rgba(199, 170, 112, 0.04), transparent 58%),
                 linear-gradient(145deg, #1b1d20, #0d0f11);
+        }
+
+        .gallery-card--portrait .gallery-card__media {
+            aspect-ratio: 4 / 5;
+        }
+
+        .gallery-card--square .gallery-card__media {
+            aspect-ratio: 1 / 1;
         }
 
         .gallery-card__media::before {
             content: "";
             position: absolute;
-            inset: -20px;
-            z-index: -2;
+            inset: 0;
+            z-index: -1;
             background-image:
-                linear-gradient(rgba(7, 8, 9, 0.2), rgba(7, 8, 9, 0.38)),
+                linear-gradient(rgba(7, 8, 9, 0.16), rgba(7, 8, 9, 0.28)),
                 var(--photo);
-            background-position: center;
+            background-position: var(--focal-point, center);
             background-size: cover;
-            filter: blur(20px) saturate(0.78);
             opacity: 0;
-            transform: scale(1.12);
-            transition: opacity 500ms ease, transform 900ms var(--ease-out);
+            transition: opacity 220ms ease;
         }
 
         .gallery-card.is-loaded .gallery-card__media::before {
-            opacity: 0.48;
+            opacity: 0.16;
         }
 
         .gallery-card__media::after {
@@ -539,16 +545,17 @@
             border: 1px solid rgba(255, 255, 255, 0.04);
             border-radius: inherit;
             background:
-                linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 24%, transparent 74%, rgba(0, 0, 0, 0.22));
+                linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 24%, transparent 74%, rgba(0, 0, 0, 0.18));
         }
 
         .gallery-card__image {
             width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: cover;
+            object-position: var(--focal-point, 50% 50%);
             opacity: 0;
-            transform: scale(1.012);
-            transition: opacity 480ms ease, transform 760ms var(--ease-out), filter 300ms ease;
+            transform: scale(1.01);
+            transition: opacity 260ms ease, transform 360ms var(--ease-out);
         }
 
         .gallery-card.is-loaded .gallery-card__image {
@@ -577,7 +584,6 @@
             border-radius: 999px;
             color: var(--ivory);
             background: rgba(12, 13, 15, 0.6);
-            backdrop-filter: blur(12px);
             font-size: 0.82rem;
             font-weight: 650;
             transform: translateY(8px);
@@ -670,7 +676,6 @@
 
         .viewer::backdrop {
             background: rgba(2, 3, 4, 0.97);
-            backdrop-filter: blur(18px);
         }
 
         .viewer[open] {
@@ -703,7 +708,7 @@
             width: 114%;
             height: 114%;
             object-fit: cover;
-            filter: blur(52px) saturate(0.72) brightness(0.42);
+            filter: blur(34px) saturate(0.72) brightness(0.42);
             opacity: 0.5;
             transform: scale(1.08);
             transition: opacity 240ms ease;
@@ -783,7 +788,6 @@
             color: var(--ivory);
             background: rgba(10, 11, 13, 0.58);
             box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
-            backdrop-filter: blur(16px);
             cursor: pointer;
             transition: transform 220ms var(--ease-out), background 220ms ease, border-color 220ms ease;
         }
@@ -815,7 +819,7 @@
                 0 0 0 1px rgba(255, 255, 255, 0.07);
             opacity: 1;
             transform: translate3d(0, 0, 0) scale(1);
-            transition: transform 260ms var(--ease-out), opacity 220ms ease, filter 220ms ease;
+            transition: transform 220ms var(--ease-out), opacity 180ms ease;
             will-change: transform, opacity;
             pointer-events: none;
         }
@@ -834,7 +838,6 @@
             border-radius: 999px;
             color: rgba(242, 239, 231, 0.72);
             background: rgba(10, 11, 13, 0.42);
-            backdrop-filter: blur(14px);
             font-size: 0.82rem;
             white-space: nowrap;
             opacity: 0;
@@ -877,13 +880,11 @@
             }
 
             .gallery-card:not(:disabled):hover .gallery-card__image {
-                transform: scale(1.03);
-                filter: brightness(1.045);
+                transform: scale(1.028);
             }
 
             .gallery-card:not(:disabled):hover .gallery-card__media::before {
-                opacity: 0.63;
-                transform: scale(1.17);
+                opacity: 0.22;
             }
 
             .gallery-card:not(:disabled):hover .gallery-card__veil {
@@ -921,6 +922,11 @@
             .viewer__image-wrap {
                 inset-inline: 6px;
             }
+
+            .viewer__ambient {
+                filter: blur(22px) saturate(0.72) brightness(0.36);
+                opacity: 0.34;
+            }
         }
 
         @media (max-width: 980px) {
@@ -937,17 +943,31 @@
             }
 
             .hero {
-                min-height: min(780px, calc(100svh - 14px));
-                padding-inline: 11px;
+                min-height: min(660px, calc(100svh - 14px));
+                padding: 54px 11px 62px;
             }
 
             .monument {
-                width: min(560px, 96vw);
+                width: min(560px, 95vw);
+                padding-top: 58px;
             }
 
             .monument__body {
-                min-height: 430px;
-                padding-inline: 52px;
+                min-height: 356px;
+                padding: 54px 34px 48px;
+            }
+
+            .monument__eyebrow {
+                font-size: 0.72rem;
+                letter-spacing: 0.18em;
+            }
+
+            .monument__name {
+                font-size: clamp(2.9rem, 13vw, 4.9rem);
+            }
+
+            .monument__message {
+                font-size: clamp(1.06rem, 5vw, 1.28rem);
             }
 
             .content {
@@ -969,6 +989,10 @@
 
             .gallery-card__media {
                 aspect-ratio: 4 / 3;
+            }
+
+            .gallery-card--portrait .gallery-card__media {
+                aspect-ratio: 4 / 5;
             }
 
             .viewer__counter {
@@ -1098,7 +1122,7 @@
                 <span class="viewer__progress-bar" id="viewer-progress"></span>
             </div>
 
-            <p class="viewer__counter" id="viewer-counter">1 / 22</p>
+            <p class="viewer__counter" id="viewer-counter">1 / 30</p>
             <p class="viewer__identity">Alper Cinar</p>
 
             <button class="viewer__close" id="viewer-close" type="button" aria-label="Bildansicht schließen">
@@ -1135,13 +1159,17 @@
         (() => {
             'use strict';
 
-            const IMAGE_COUNT = 22;
+            const IMAGE_COUNT = 30;
             const IMAGE_PREFIX = 'bild_';
             const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp'];
 
             /* Hier können später persönliche Bildunterschriften eingetragen werden.
                Beispiel: 1: 'Familienurlaub 1998' */
             const CAPTIONS = Object.freeze({});
+
+            /* Optional: individuelle Bildausschnitte für die Galerie-Vorschau.
+               Beispiel: 1: '50% 78%' */
+            const FOCAL_POINTS = Object.freeze({});
 
             const gallery = document.getElementById('gallery');
             const galleryStatus = document.getElementById('gallery-status');
@@ -1205,7 +1233,7 @@
                     if (!gallery.querySelector('.empty-state')) {
                         const message = document.createElement('p');
                         message.className = 'empty-state';
-                        message.textContent = 'Bitte lege die Dateien bild_001.jpg bis bild_022.jpg in denselben Ordner wie diese HTML-Datei.';
+                        message.textContent = 'Bitte lege die Dateien bild_001.jpg bis bild_030.jpg in denselben Ordner wie diese HTML-Datei.';
                         gallery.appendChild(message);
                     }
                     return;
@@ -1268,6 +1296,18 @@
                     image.addEventListener('load', () => {
                         if (entry.status !== 'pending') return;
 
+                        const ratio = image.naturalWidth / Math.max(image.naturalHeight, 1);
+                        const focalPoint = FOCAL_POINTS[number] || defaultFocalPoint(ratio);
+
+                        if (ratio < 0.9) {
+                            card.classList.add('gallery-card--portrait');
+                        } else if (ratio <= 1.1) {
+                            card.classList.add('gallery-card--square');
+                        }
+
+                        card.style.setProperty('--focal-point', focalPoint);
+                        image.style.objectPosition = focalPoint;
+
                         entry.status = 'loaded';
                         entry.source = entry.pendingSource;
                         state.loadedCount += 1;
@@ -1309,6 +1349,12 @@
                 const available = loadedEntries();
                 const entry = state.entries[index];
                 return available.findIndex((candidate) => candidate === entry) + 1;
+            }
+
+            function defaultFocalPoint(ratio) {
+                if (ratio < 0.9) return '50% 44%';
+                if (ratio <= 1.1) return '50% 50%';
+                return '50% 42%';
             }
 
             function renderViewer(announce = true) {
@@ -1392,42 +1438,38 @@
             }
 
             function animateTo(direction, nextIndex) {
-                const travel = Math.min(88, Math.max(44, window.innerWidth * 0.055));
+                const travel = Math.min(82, Math.max(40, window.innerWidth * 0.05));
                 const exitX = direction > 0 ? -travel : travel;
                 const enterX = -exitX;
-                const duration = reduceMotion.matches ? 0 : 190;
+                const duration = reduceMotion.matches ? 0 : 150;
 
                 state.changing = true;
-                viewerImage.style.transition = duration ? `transform ${duration}ms var(--ease-out), opacity ${duration}ms ease, filter ${duration}ms ease` : 'none';
-                viewerImage.style.transform = `translate3d(${exitX}px, 0, 0) scale(0.985)`;
-                viewerImage.style.opacity = '0';
-                viewerImage.style.filter = 'blur(2px)';
-                viewerAmbient.style.opacity = '0.18';
+                viewerImage.style.transition = duration ? `transform ${duration}ms var(--ease-out), opacity ${duration}ms ease` : 'none';
+                viewerImage.style.transform = `translate3d(${exitX}px, 0, 0) scale(0.988)`;
+                viewerImage.style.opacity = '0.16';
+                viewerAmbient.style.opacity = '0.2';
 
                 window.setTimeout(() => {
                     state.currentIndex = nextIndex;
                     renderViewer();
                     viewerImage.style.transition = 'none';
-                    viewerImage.style.transform = `translate3d(${enterX}px, 0, 0) scale(0.985)`;
-                    viewerImage.style.opacity = '0';
-                    viewerImage.style.filter = 'blur(2px)';
+                    viewerImage.style.transform = `translate3d(${enterX}px, 0, 0) scale(0.988)`;
+                    viewerImage.style.opacity = '0.16';
 
                     requestAnimationFrame(() => {
                         requestAnimationFrame(() => {
-                            viewerImage.style.transition = duration ? `transform ${duration + 70}ms var(--ease-out), opacity ${duration + 30}ms ease, filter ${duration + 30}ms ease` : 'none';
+                            viewerImage.style.transition = duration ? `transform ${duration + 40}ms var(--ease-out), opacity ${duration + 20}ms ease` : 'none';
                             viewerImage.style.transform = 'translate3d(0, 0, 0) scale(1)';
                             viewerImage.style.opacity = '1';
-                            viewerImage.style.filter = 'blur(0)';
                             viewerAmbient.style.opacity = '0.5';
 
                             window.setTimeout(() => {
                                 viewerImage.style.removeProperty('transition');
                                 viewerImage.style.removeProperty('transform');
                                 viewerImage.style.removeProperty('opacity');
-                                viewerImage.style.removeProperty('filter');
                                 viewerAmbient.style.removeProperty('opacity');
                                 state.changing = false;
-                            }, duration + 90);
+                            }, duration + 60);
                         });
                     });
                 }, duration);

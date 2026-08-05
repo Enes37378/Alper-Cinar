@@ -5,37 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <meta name="theme-color" content="#111214">
     <meta name="color-scheme" content="dark">
-    <meta name="description" content="Eine Gedenkgalerie mit besonderen Erinnerungen an Alper Cinar.">
+    <meta name="description" content="Eine persönliche Gedenkseite und Erinnerungsgalerie für Alper Cinar.">
     <title>Zum Gedenken an Alper Cinar</title>
 
     <style>
         :root {
-            /* Vom anthrazitfarbenen Naturstein des Grabmals abgeleitete Palette */
-            --page-bg: #0d0e0f;
-            --surface: rgba(28, 29, 31, 0.96);
-            --surface-strong: #202124;
-            --surface-soft: #292a2d;
-            --stone-deep: #141517;
-            --stone-mid: #35373b;
-            --stone-light: #777a80;
-            --text: #f3f1eb;
-            --text-muted: #ccc8bf;
-            --text-subtle: #9f9c95;
-            --accent: #c4ad78;
-            --accent-strong: #e0cea1;
-            --accent-soft: rgba(196, 173, 120, 0.12);
-            --floral: #8e8298;
-            --green: #6f7c68;
-            --border: rgba(232, 229, 220, 0.13);
-            --border-strong: rgba(211, 194, 154, 0.45);
-            --danger: #e6b5b8;
-            --shadow: 0 30px 90px rgba(0, 0, 0, 0.52);
-            --focus-ring: 0 0 0 4px rgba(196, 173, 120, 0.26);
-            --radius-xl: 24px;
-            --radius-lg: 17px;
-            --radius-md: 13px;
-            --content-width: 1360px;
-            --ease: cubic-bezier(0.22, 1, 0.36, 1);
+            /* Vom anthrazitfarbenen Grabmal, den silbrigen Marmoradern,
+               der Grabkerze und der Bepflanzung abgeleitete Farbwelt. */
+            --ink: #08090a;
+            --night: #101113;
+            --anthracite: #1b1d20;
+            --anthracite-light: #2b2e33;
+            --stone-blue: #7b8091;
+            --stone-silver: #c7c7ca;
+            --ivory: #f2efe7;
+            --muted: #c5c2ba;
+            --subtle: #918f8a;
+            --gold: #c7aa70;
+            --gold-bright: #e1c993;
+            --moss: #637253;
+            --lavender: #776681;
+            --line: rgba(232, 230, 223, 0.13);
+            --line-strong: rgba(225, 201, 147, 0.42);
+            --shadow-xl: 0 42px 120px rgba(0, 0, 0, 0.58);
+            --shadow-card: 0 22px 58px rgba(0, 0, 0, 0.34);
+            --focus: 0 0 0 4px rgba(199, 170, 112, 0.3);
+            --radius-xl: 30px;
+            --radius-lg: 20px;
+            --radius-md: 14px;
+            --page-width: 1480px;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         *,
@@ -46,19 +45,21 @@
 
         html {
             min-width: 280px;
-            background: var(--page-bg);
             scroll-behavior: smooth;
+            background: var(--ink);
         }
 
         body {
             min-height: 100vh;
             min-height: 100dvh;
             margin: 0;
-            color: var(--text);
+            overflow-x: hidden;
+            color: var(--ivory);
             background:
-                radial-gradient(circle at 12% 8%, rgba(119, 122, 128, 0.12), transparent 34rem),
-                radial-gradient(circle at 88% 18%, rgba(111, 124, 104, 0.07), transparent 30rem),
-                linear-gradient(145deg, #090a0b 0%, #17181a 48%, #0d0e0f 100%);
+                radial-gradient(circle at 14% 3%, rgba(123, 128, 145, 0.13), transparent 35rem),
+                radial-gradient(circle at 88% 18%, rgba(99, 114, 83, 0.07), transparent 32rem),
+                radial-gradient(circle at 58% 98%, rgba(119, 102, 129, 0.055), transparent 30rem),
+                linear-gradient(145deg, #08090a 0%, #15171a 47%, #0b0c0e 100%);
             font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
@@ -68,25 +69,45 @@
         body::before {
             content: "";
             position: fixed;
+            inset: -12%;
+            z-index: -2;
+            pointer-events: none;
+            opacity: 0.46;
+            transform: rotate(-2deg);
+            background:
+                linear-gradient(116deg, transparent 0 18%, rgba(235, 235, 231, 0.055) 19%, transparent 20% 43%, rgba(193, 196, 205, 0.035) 44%, transparent 45% 76%, rgba(255, 255, 255, 0.025) 77%, transparent 78%),
+                linear-gradient(63deg, transparent 0 34%, rgba(255, 255, 255, 0.026) 35%, transparent 36% 69%, rgba(199, 170, 112, 0.016) 70%, transparent 71%),
+                radial-gradient(ellipse at 20% 24%, rgba(255, 255, 255, 0.028), transparent 34%),
+                radial-gradient(ellipse at 76% 75%, rgba(255, 255, 255, 0.018), transparent 30%);
+            background-size: 920px 680px, 1180px 850px, 100% 100%, 100% 100%;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
             inset: 0;
             z-index: -1;
             pointer-events: none;
-            opacity: 0.34;
-            background:
-                linear-gradient(118deg, transparent 0 38%, rgba(226, 226, 222, 0.045) 39%, transparent 40% 67%, rgba(190, 190, 186, 0.025) 68%, transparent 69%),
-                linear-gradient(64deg, transparent 0 52%, rgba(255, 255, 255, 0.025) 53%, transparent 54%),
-                radial-gradient(ellipse at 18% 22%, rgba(255, 255, 255, 0.035), transparent 35%),
-                radial-gradient(ellipse at 78% 72%, rgba(255, 255, 255, 0.022), transparent 30%);
-            background-size: 760px 620px, 980px 740px, 100% 100%, 100% 100%;
+            background: linear-gradient(180deg, transparent 55%, rgba(0, 0, 0, 0.28));
+        }
+
+        body.viewer-open {
+            overflow: hidden;
         }
 
         button,
+        a,
         img {
             -webkit-tap-highlight-color: transparent;
         }
 
-        button {
+        button,
+        a {
             font: inherit;
+        }
+
+        button {
+            color: inherit;
         }
 
         img {
@@ -108,16 +129,16 @@
 
         .skip-link {
             position: fixed;
-            top: 12px;
-            left: 12px;
+            top: 14px;
+            left: 14px;
             z-index: 10000;
-            padding: 10px 14px;
-            border-radius: 10px;
-            color: #09101d;
-            background: var(--accent-strong);
-            font-weight: 700;
+            padding: 10px 15px;
+            border-radius: 999px;
+            color: #14110a;
+            background: var(--gold-bright);
+            font-weight: 750;
             text-decoration: none;
-            transform: translateY(-160%);
+            transform: translateY(-180%);
             transition: transform 180ms ease;
         }
 
@@ -125,157 +146,303 @@
             transform: translateY(0);
         }
 
-        .page-shell {
-            position: relative;
-            width: min(calc(100% - 32px), var(--content-width));
-            margin: clamp(16px, 3vw, 40px) auto;
+        .site {
+            width: min(calc(100% - 28px), var(--page-width));
+            margin: clamp(14px, 2.6vw, 38px) auto;
             overflow: clip;
-            border: 1px solid rgba(238, 235, 227, 0.16);
+            border: 1px solid rgba(232, 230, 223, 0.15);
             border-radius: var(--radius-xl);
             background:
-                linear-gradient(116deg, transparent 0 29%, rgba(255, 255, 255, 0.025) 30%, transparent 31% 69%, rgba(255, 255, 255, 0.018) 70%, transparent 71%),
-                var(--surface);
+                linear-gradient(118deg, transparent 0 34%, rgba(255, 255, 255, 0.018) 35%, transparent 36% 71%, rgba(255, 255, 255, 0.012) 72%, transparent 73%),
+                rgba(24, 26, 29, 0.94);
             box-shadow:
-                var(--shadow),
-                0 0 0 1px rgba(0, 0, 0, 0.5) inset,
-                0 0 0 5px rgba(255, 255, 255, 0.012) inset;
+                var(--shadow-xl),
+                0 0 0 1px rgba(0, 0, 0, 0.66) inset,
+                0 0 0 7px rgba(255, 255, 255, 0.011) inset;
             backdrop-filter: blur(18px);
         }
 
-        .page-shell::before {
-            content: "";
-            position: absolute;
-            inset: 7px;
-            z-index: 5;
-            pointer-events: none;
-            border: 1px solid rgba(226, 213, 181, 0.07);
-            border-radius: calc(var(--radius-xl) - 7px);
-        }
-
-        .memorial-header {
+        /* Hero – abstrahiert die Form und Materialität des Grabmals,
+           ohne das Grabfoto selbst als Dekoration zu benutzen. */
+        .hero {
             position: relative;
             isolation: isolate;
+            display: grid;
+            min-height: clamp(590px, 79svh, 860px);
+            place-items: center;
             overflow: hidden;
-            padding: clamp(58px, 9vw, 112px) clamp(20px, 6vw, 72px);
-            text-align: center;
+            padding: clamp(72px, 10vw, 132px) clamp(18px, 5vw, 72px) clamp(68px, 8vw, 100px);
+            border-bottom: 1px solid rgba(225, 201, 147, 0.16);
             background:
-                linear-gradient(180deg, rgba(7, 8, 9, 0.03), rgba(7, 8, 9, 0.48)),
-                radial-gradient(ellipse at 50% 5%, rgba(255, 255, 255, 0.09), transparent 44%),
-                linear-gradient(125deg, #3a3b3f 0%, #1d1e20 36%, #2b2c2f 62%, #151618 100%);
-            border-bottom: 1px solid rgba(226, 213, 181, 0.16);
+                radial-gradient(ellipse at 50% 17%, rgba(255, 255, 255, 0.095), transparent 39%),
+                radial-gradient(circle at 50% 48%, rgba(199, 170, 112, 0.055), transparent 33rem),
+                linear-gradient(150deg, #36393f 0%, #1c1e22 34%, #2a2d32 62%, #131518 100%);
         }
 
-        .memorial-header::before {
+        .hero::before {
             content: "";
             position: absolute;
-            inset: -20%;
+            inset: -17%;
+            z-index: -2;
+            opacity: 0.62;
+            transform: rotate(-1.5deg) scale(1.07);
+            background:
+                linear-gradient(118deg, transparent 0 17%, rgba(237, 238, 237, 0.13) 18%, rgba(202, 205, 213, 0.042) 19% 22%, transparent 23% 47%, rgba(245, 244, 239, 0.085) 48%, transparent 49% 76%, rgba(205, 207, 214, 0.06) 77%, transparent 78%),
+                linear-gradient(65deg, transparent 0 40%, rgba(255, 255, 255, 0.045) 41%, transparent 42% 69%, rgba(255, 255, 255, 0.03) 70%, transparent 71%);
+            background-size: 830px 600px, 1120px 820px;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
             z-index: -1;
-            opacity: 0.52;
-            transform: rotate(-2deg) scale(1.08);
             background:
-                linear-gradient(116deg, transparent 0 21%, rgba(235, 235, 231, 0.11) 22%, rgba(188, 189, 188, 0.035) 23% 26%, transparent 27% 48%, rgba(245, 245, 240, 0.075) 49%, transparent 50% 76%, rgba(220, 220, 216, 0.055) 77%, transparent 78%),
-                linear-gradient(67deg, transparent 0 39%, rgba(255, 255, 255, 0.045) 40%, transparent 41% 69%, rgba(255, 255, 255, 0.035) 70%, transparent 71%);
-            background-size: 760px 520px, 980px 720px;
-            filter: blur(0.2px);
+                linear-gradient(180deg, rgba(5, 6, 7, 0.08), transparent 28%, transparent 72%, rgba(6, 7, 8, 0.55)),
+                radial-gradient(ellipse at 50% 53%, transparent 0 40%, rgba(6, 7, 8, 0.25) 78%);
         }
 
-        .memorial-header::after {
+        .monument {
+            position: relative;
+            width: min(760px, 94vw);
+            padding-top: clamp(52px, 9vw, 92px);
+            filter: drop-shadow(0 34px 50px rgba(0, 0, 0, 0.42));
+        }
+
+        .monument__pediment {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 91%;
+            height: clamp(78px, 13vw, 126px);
+            transform: translateX(-50%);
+            clip-path: polygon(50% 0, 100% 100%, 0 100%);
+            background:
+                linear-gradient(116deg, transparent 0 36%, rgba(255, 255, 255, 0.13) 37%, transparent 38% 66%, rgba(255, 255, 255, 0.055) 67%, transparent 68%),
+                linear-gradient(145deg, #575b64 0%, #292c31 42%, #3b3e45 69%, #1e2024 100%);
+        }
+
+        .monument__pediment::after {
             content: "";
             position: absolute;
-            left: 50%;
-            bottom: 24px;
-            width: min(290px, 58vw);
-            height: 1px;
+            inset: 8px 12px 0;
+            clip-path: polygon(50% 0, 100% 100%, 0 100%);
+            border-bottom: 1px solid rgba(235, 229, 213, 0.25);
+            background:
+                linear-gradient(115deg, transparent 0 44%, rgba(255, 255, 255, 0.07) 45%, transparent 46%),
+                linear-gradient(150deg, rgba(31, 33, 37, 0.18), rgba(12, 13, 15, 0.46));
+        }
+
+        .monument__body {
+            position: relative;
+            overflow: hidden;
+            min-height: clamp(390px, 56vw, 535px);
+            padding: clamp(64px, 9vw, 94px) clamp(38px, 9vw, 104px) clamp(52px, 8vw, 76px);
+            border: 1px solid rgba(239, 235, 224, 0.2);
+            border-top-color: rgba(239, 235, 224, 0.3);
+            border-radius: 4px 4px 19px 19px;
+            background:
+                linear-gradient(115deg, transparent 0 27%, rgba(255, 255, 255, 0.076) 28%, transparent 29% 61%, rgba(203, 206, 214, 0.042) 62%, transparent 63%),
+                linear-gradient(64deg, transparent 0 48%, rgba(255, 255, 255, 0.032) 49%, transparent 50%),
+                radial-gradient(ellipse at 50% 6%, rgba(255, 255, 255, 0.1), transparent 45%),
+                linear-gradient(145deg, #34373d 0%, #1f2226 38%, #2d3035 66%, #17191c 100%);
+            box-shadow:
+                0 30px 70px rgba(0, 0, 0, 0.45),
+                0 0 0 9px rgba(6, 7, 8, 0.2) inset,
+                0 1px 0 rgba(255, 255, 255, 0.14) inset;
+            text-align: center;
+        }
+
+        .monument__body::before,
+        .monument__body::after {
+            content: "";
+            position: absolute;
+            top: 26px;
+            bottom: 26px;
+            width: clamp(17px, 3vw, 29px);
+            border: 1px solid rgba(235, 232, 224, 0.13);
+            background:
+                linear-gradient(90deg, rgba(255, 255, 255, 0.09), transparent 38%, rgba(0, 0, 0, 0.28)),
+                linear-gradient(180deg, #3f4249, #1e2024 48%, #34373a);
+            box-shadow: 0 0 0 5px rgba(9, 10, 11, 0.17);
+        }
+
+        .monument__body::before {
+            left: clamp(12px, 3vw, 28px);
+        }
+
+        .monument__body::after {
+            right: clamp(12px, 3vw, 28px);
+        }
+
+        .monument__eyebrow {
+            position: relative;
             z-index: 1;
-            transform: translateX(-50%);
-            background: linear-gradient(90deg, transparent, rgba(224, 206, 161, 0.42) 24%, rgba(224, 206, 161, 0.78) 50%, rgba(224, 206, 161, 0.42) 76%, transparent);
-            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
-        }
-
-        .eyebrow {
-            margin: 0 0 13px;
-            color: var(--accent-strong);
-            font-size: clamp(0.74rem, 1.6vw, 0.88rem);
-            font-weight: 650;
-            letter-spacing: 0.2em;
+            margin: 0 0 14px;
+            color: var(--gold-bright);
+            font-size: clamp(0.72rem, 1.7vw, 0.9rem);
+            font-weight: 700;
+            letter-spacing: 0.23em;
             text-transform: uppercase;
-            text-shadow: 0 1px 12px rgba(0, 0, 0, 0.45);
-        }
-
-        .memorial-title {
-            margin: 0;
-            color: #f2f0e9;
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(2.7rem, 8vw, 5.7rem);
-            font-weight: 400;
-            line-height: 0.98;
-            letter-spacing: -0.025em;
-            text-wrap: balance;
-            text-shadow:
-                0 2px 0 rgba(255, 255, 255, 0.07),
-                0 8px 38px rgba(0, 0, 0, 0.52);
-        }
-
-        .memorial-subtitle {
-            max-width: 700px;
-            margin: 22px auto 0;
-            color: var(--accent-strong);
-            font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(1.08rem, 2.4vw, 1.45rem);
-            font-style: italic;
             text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
         }
 
-        .memorial-dates {
-            margin: 14px 0 0;
-            color: var(--text-muted);
-            font-size: clamp(0.92rem, 1.8vw, 1.04rem);
-        }
-
-        .main-content {
+        .monument__name {
             position: relative;
-            padding: clamp(28px, 5vw, 64px);
-            background:
-                linear-gradient(122deg, transparent 0 34%, rgba(255, 255, 255, 0.018) 35%, transparent 36% 72%, rgba(255, 255, 255, 0.012) 73%, transparent 74%),
-                linear-gradient(180deg, rgba(47, 48, 51, 0.7), rgba(25, 26, 28, 0.88));
+            z-index: 1;
+            margin: 0;
+            color: var(--ivory);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(3rem, 9vw, 6.8rem);
+            font-weight: 400;
+            line-height: 0.96;
+            letter-spacing: -0.035em;
+            text-wrap: balance;
+            text-shadow:
+                0 1px 0 rgba(255, 255, 255, 0.12),
+                0 10px 35px rgba(0, 0, 0, 0.48);
         }
 
-        .intro {
-            max-width: 760px;
-            margin: 0 auto clamp(28px, 5vw, 52px);
+        .monument__dates {
+            position: relative;
+            z-index: 1;
+            margin: 20px 0 0;
+            color: var(--stone-silver);
+            font-size: clamp(0.95rem, 2vw, 1.12rem);
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.055em;
+        }
+
+        .monument__ornament {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 14px;
+            width: min(410px, 86%);
+            margin: clamp(27px, 5vw, 40px) auto 0;
+            color: var(--gold);
+            font-size: 0.65rem;
+        }
+
+        .monument__ornament::before,
+        .monument__ornament::after {
+            content: "";
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(225, 201, 147, 0.66));
+        }
+
+        .monument__ornament::after {
+            transform: scaleX(-1);
+        }
+
+        .monument__message {
+            position: relative;
+            z-index: 1;
+            max-width: 560px;
+            margin: 22px auto 0;
+            color: var(--muted);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(1.12rem, 2.5vw, 1.5rem);
+            font-style: italic;
+            line-height: 1.45;
+            text-wrap: balance;
+        }
+
+        .hero__scroll {
+            position: absolute;
+            left: 50%;
+            bottom: clamp(22px, 3vw, 34px);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: rgba(242, 239, 231, 0.72);
+            font-size: 0.82rem;
+            font-weight: 650;
+            letter-spacing: 0.08em;
+            text-decoration: none;
+            text-transform: uppercase;
+            transform: translateX(-50%);
+            transition: color 220ms ease, transform 220ms var(--ease-out);
+        }
+
+        .hero__scroll::after {
+            content: "↓";
+            color: var(--gold-bright);
+            font-size: 1rem;
+        }
+
+        .hero__scroll:focus-visible,
+        .gallery-card:focus-visible,
+        .viewer__close:focus-visible {
+            outline: none;
+            box-shadow: var(--focus);
+        }
+
+        .content {
+            position: relative;
+            padding: clamp(54px, 7vw, 104px) clamp(16px, 5vw, 76px) clamp(64px, 8vw, 116px);
+            background:
+                linear-gradient(122deg, transparent 0 31%, rgba(255, 255, 255, 0.018) 32%, transparent 33% 73%, rgba(255, 255, 255, 0.012) 74%, transparent 75%),
+                linear-gradient(180deg, rgba(43, 46, 51, 0.88), rgba(20, 22, 25, 0.97));
+        }
+
+        .section-intro {
+            max-width: 850px;
+            margin: 0 auto clamp(42px, 6vw, 72px);
             text-align: center;
         }
 
-        .intro__text {
+        .section-kicker {
+            margin: 0 0 12px;
+            color: var(--gold-bright);
+            font-size: 0.78rem;
+            font-weight: 750;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .section-title {
             margin: 0;
-            color: var(--text-muted);
-            font-size: clamp(1rem, 2vw, 1.13rem);
+            color: var(--ivory);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(2.1rem, 5vw, 4.2rem);
+            font-weight: 400;
+            line-height: 1.06;
+            letter-spacing: -0.025em;
+            text-wrap: balance;
+        }
+
+        .section-copy {
+            max-width: 690px;
+            margin: 20px auto 0;
+            color: var(--muted);
+            font-size: clamp(1rem, 2vw, 1.14rem);
             text-wrap: pretty;
         }
 
         .interaction-hint {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
             gap: 9px;
-            min-height: 42px;
-            margin: 22px 0 0;
-            padding: 9px 15px;
-            border: 1px solid var(--border);
+            min-height: 40px;
+            margin: 24px 0 0;
+            padding: 8px 14px;
+            border: 1px solid var(--line);
             border-radius: 999px;
-            color: var(--text-subtle);
-            background: rgba(13, 14, 15, 0.42);
-            font-size: 0.9rem;
-            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.025) inset;
+            color: var(--subtle);
+            background: rgba(9, 10, 11, 0.34);
+            font-size: 0.88rem;
         }
 
         .interaction-hint::before {
             content: "";
-            width: 7px;
-            height: 7px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 0 10px rgba(196, 173, 120, 0.46);
+            background: var(--gold);
+            box-shadow: 0 0 12px rgba(199, 170, 112, 0.54);
         }
 
         .hint-touch {
@@ -283,42 +450,42 @@
         }
 
         .gallery-status {
-            min-height: 1.6em;
+            min-height: 1.5em;
             margin: 0 0 18px;
-            color: var(--text-subtle);
-            font-size: 0.92rem;
+            color: var(--subtle);
+            font-size: 0.88rem;
             text-align: center;
         }
 
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
-            gap: clamp(16px, 2.5vw, 26px);
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: clamp(14px, 2vw, 24px);
         }
 
         .gallery-card {
+            --photo: none;
             position: relative;
             min-width: 0;
             overflow: hidden;
             padding: 0;
-            border: 1px solid var(--border);
+            border: 1px solid var(--line);
             border-radius: var(--radius-lg);
             color: inherit;
-            background:
-                linear-gradient(128deg, transparent 0 42%, rgba(255, 255, 255, 0.025) 43%, transparent 44%),
-                linear-gradient(145deg, rgba(54, 55, 59, 0.94), rgba(26, 27, 29, 0.98));
+            background: #111316;
             box-shadow:
-                0 14px 32px rgba(0, 0, 0, 0.3),
-                0 1px 0 rgba(255, 255, 255, 0.035) inset;
+                var(--shadow-card),
+                0 1px 0 rgba(255, 255, 255, 0.04) inset;
             cursor: pointer;
-            text-align: left;
             opacity: 0;
-            transform: translateY(18px);
+            transform: translateY(22px);
             transition:
-                transform 380ms var(--ease),
-                border-color 280ms ease,
-                box-shadow 280ms ease,
-                opacity 500ms var(--ease);
+                opacity 620ms var(--ease-out),
+                transform 440ms var(--ease-out),
+                border-color 260ms ease,
+                box-shadow 320ms ease;
+            content-visibility: auto;
+            contain-intrinsic-size: 360px 270px;
         }
 
         .gallery-card.is-visible {
@@ -330,37 +497,49 @@
             cursor: progress;
         }
 
-        .gallery-card:focus-visible,
-        .icon-button:focus-visible,
-        .mobile-action:focus-visible {
-            outline: none;
-            box-shadow: var(--focus-ring);
-        }
-
         .gallery-card__media {
             position: relative;
             display: grid;
-            place-items: center;
             width: 100%;
             aspect-ratio: 4 / 3;
+            place-items: center;
             overflow: hidden;
+            isolation: isolate;
             background:
-                radial-gradient(circle at 50% 45%, rgba(196, 173, 120, 0.055), transparent 58%),
-                linear-gradient(135deg, rgba(255, 255, 255, 0.025), transparent),
-                #111214;
+                radial-gradient(circle at 50% 50%, rgba(199, 170, 112, 0.05), transparent 58%),
+                linear-gradient(145deg, #1b1d20, #0d0f11);
         }
 
         .gallery-card__media::before {
             content: "";
             position: absolute;
-            inset: 0;
-            background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.06) 47%, transparent 64%);
-            transform: translateX(-100%);
-            animation: loading-sheen 1.5s infinite;
+            inset: -20px;
+            z-index: -2;
+            background-image:
+                linear-gradient(rgba(7, 8, 9, 0.2), rgba(7, 8, 9, 0.38)),
+                var(--photo);
+            background-position: center;
+            background-size: cover;
+            filter: blur(20px) saturate(0.78);
+            opacity: 0;
+            transform: scale(1.12);
+            transition: opacity 500ms ease, transform 900ms var(--ease-out);
         }
 
         .gallery-card.is-loaded .gallery-card__media::before {
-            display: none;
+            opacity: 0.48;
+        }
+
+        .gallery-card__media::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: inherit;
+            background:
+                linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 24%, transparent 74%, rgba(0, 0, 0, 0.22));
         }
 
         .gallery-card__image {
@@ -368,300 +547,357 @@
             height: 100%;
             object-fit: contain;
             opacity: 0;
-            transform: scale(1.015);
-            transition: opacity 420ms ease, transform 650ms var(--ease), filter 300ms ease;
+            transform: scale(1.012);
+            transition: opacity 480ms ease, transform 760ms var(--ease-out), filter 300ms ease;
         }
 
         .gallery-card.is-loaded .gallery-card__image {
             opacity: 1;
         }
 
-        .gallery-card__caption {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            min-height: 54px;
-            padding: 13px 15px;
-            color: var(--text-muted);
-            font-size: 0.92rem;
-            font-weight: 600;
+        .gallery-card__veil {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            display: grid;
+            place-items: end center;
+            padding: 18px;
+            pointer-events: none;
+            opacity: 0;
+            background: linear-gradient(180deg, transparent 50%, rgba(5, 6, 7, 0.66));
+            transition: opacity 280ms ease;
         }
 
-        .gallery-card__caption::after {
-            content: "↗";
-            color: var(--accent);
-            font-size: 1rem;
-            transition: transform 240ms var(--ease);
+        .gallery-card__open-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 13px;
+            border: 1px solid rgba(225, 201, 147, 0.32);
+            border-radius: 999px;
+            color: var(--ivory);
+            background: rgba(12, 13, 15, 0.6);
+            backdrop-filter: blur(12px);
+            font-size: 0.82rem;
+            font-weight: 650;
+            transform: translateY(8px);
+            transition: transform 300ms var(--ease-out);
+        }
+
+        .gallery-card__open-label::after {
+            content: "＋";
+            color: var(--gold-bright);
         }
 
         .empty-state {
             grid-column: 1 / -1;
-            padding: 30px;
-            border: 1px dashed var(--border-strong);
+            padding: 34px;
+            border: 1px dashed var(--line-strong);
             border-radius: var(--radius-lg);
-            color: var(--text-muted);
-            background: rgba(8, 12, 19, 0.28);
+            color: var(--muted);
+            background: rgba(8, 9, 10, 0.3);
             text-align: center;
         }
 
-        .memorial-footer {
+        .footer {
             position: relative;
-            padding: clamp(32px, 5vw, 54px) clamp(20px, 5vw, 56px);
-            border-top: 1px solid rgba(226, 213, 181, 0.14);
+            padding: clamp(58px, 8vw, 94px) clamp(20px, 6vw, 76px);
+            border-top: 1px solid rgba(225, 201, 147, 0.14);
             background:
-                linear-gradient(118deg, transparent 0 44%, rgba(255, 255, 255, 0.018) 45%, transparent 46%),
-                rgba(16, 17, 18, 0.78);
+                radial-gradient(circle at 50% 16%, rgba(199, 170, 112, 0.055), transparent 25rem),
+                linear-gradient(120deg, transparent 0 44%, rgba(255, 255, 255, 0.018) 45%, transparent 46%),
+                #111315;
             text-align: center;
         }
 
-        .memorial-footer::before {
-            content: "◆";
-            display: block;
-            width: 120px;
-            margin: 0 auto 20px;
-            color: var(--accent);
-            font-size: 0.56rem;
-            line-height: 1;
-            background: linear-gradient(90deg, rgba(196, 173, 120, 0), rgba(196, 173, 120, 0.45) 35%, transparent 35% 65%, rgba(196, 173, 120, 0.45) 65%, rgba(196, 173, 120, 0));
-            background-position: center;
-            background-size: 100% 1px;
-            background-repeat: no-repeat;
+        .footer__candle {
+            position: relative;
+            width: 10px;
+            height: 10px;
+            margin: 0 auto 27px;
+            border-radius: 50%;
+            background: var(--gold-bright);
+            box-shadow:
+                0 0 16px rgba(225, 201, 147, 0.78),
+                0 0 42px rgba(199, 170, 112, 0.34);
         }
 
-        .memorial-footer blockquote {
-            max-width: 780px;
+        .footer__candle::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            width: 1px;
+            height: 12px;
+            background: linear-gradient(var(--gold), transparent);
+            transform: translateX(-50%);
+        }
+
+        .footer blockquote {
+            max-width: 820px;
             margin: 0 auto;
-            color: var(--text-muted);
+            color: var(--muted);
             font-family: Georgia, "Times New Roman", serif;
-            font-size: clamp(1rem, 2.1vw, 1.22rem);
+            font-size: clamp(1.2rem, 2.7vw, 1.72rem);
             font-style: italic;
+            line-height: 1.55;
+            text-wrap: balance;
         }
 
-        .memorial-footer p {
-            margin: 16px 0 0;
-            color: var(--text-subtle);
-            font-size: 0.92rem;
-            letter-spacing: 0.04em;
+        .footer p {
+            margin: 21px 0 0;
+            color: var(--subtle);
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
 
-        /* Bildansicht */
-        .lightbox {
+        /* Immersive Bildansicht: keine Navigationsleiste und keine Pfeilknöpfe.
+           Navigation erfolgt per Wischen/Ziehen, Trackpad oder Tastatur. */
+        .viewer {
             width: 100vw;
             max-width: none;
             height: 100vh;
             height: 100dvh;
             max-height: none;
             margin: 0;
-            padding: max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(12px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
+            padding: 0;
             overflow: hidden;
             border: 0;
-            color: var(--text);
+            color: var(--ivory);
             background: transparent;
         }
 
-        .lightbox::backdrop {
-            background: rgba(5, 5, 6, 0.95);
+        .viewer::backdrop {
+            background: rgba(2, 3, 4, 0.97);
             backdrop-filter: blur(18px);
         }
 
-        .lightbox[open] {
-            display: grid;
-            place-items: center;
+        .viewer[open] {
+            display: block;
         }
 
-        .lightbox__shell {
+        .viewer__stage {
             position: relative;
-            display: grid;
-            grid-template-rows: minmax(0, 1fr) auto;
-            width: min(96vw, 1540px);
-            height: min(94dvh, 1040px);
+            width: 100vw;
+            height: 100vh;
+            height: 100dvh;
             overflow: hidden;
-            border: 1px solid rgba(224, 206, 161, 0.24);
-            border-radius: 22px;
-            background: rgba(17, 18, 19, 0.98);
-            box-shadow:
-                0 30px 100px rgba(0, 0, 0, 0.76),
-                0 0 0 1px rgba(255, 255, 255, 0.035) inset;
-            animation: lightbox-in 300ms var(--ease) both;
-        }
-
-        .lightbox__stage {
-            position: relative;
-            display: grid;
-            min-height: 0;
-            place-items: center;
-            overflow: hidden;
-            padding: clamp(12px, 2vw, 28px) clamp(12px, 5vw, 82px);
-            background:
-                radial-gradient(circle at 50% 45%, rgba(196, 173, 120, 0.075), transparent 48%),
-                linear-gradient(122deg, transparent 0 43%, rgba(255, 255, 255, 0.018) 44%, transparent 45%),
-                #0b0c0d;
+            isolation: isolate;
             touch-action: pan-y pinch-zoom;
             user-select: none;
+            cursor: grab;
+            background:
+                radial-gradient(circle at 50% 48%, rgba(199, 170, 112, 0.045), transparent 42rem),
+                #050607;
         }
 
-        .lightbox__image {
+        .viewer__stage.is-dragging {
+            cursor: grabbing;
+        }
+
+        .viewer__ambient {
+            position: absolute;
+            inset: -7%;
+            z-index: -2;
+            width: 114%;
+            height: 114%;
+            object-fit: cover;
+            filter: blur(52px) saturate(0.72) brightness(0.42);
+            opacity: 0.5;
+            transform: scale(1.08);
+            transition: opacity 240ms ease;
+        }
+
+        .viewer__shade {
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                linear-gradient(180deg, rgba(0, 0, 0, 0.52), transparent 24%, transparent 72%, rgba(0, 0, 0, 0.48)),
+                radial-gradient(ellipse at 50% 50%, transparent 0 44%, rgba(0, 0, 0, 0.32) 100%);
+        }
+
+        .viewer__progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 8;
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .viewer__progress-bar {
+            display: block;
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, var(--stone-blue), var(--gold-bright));
+            box-shadow: 0 0 15px rgba(225, 201, 147, 0.42);
+            transition: width 340ms var(--ease-out);
+        }
+
+        .viewer__counter {
+            position: absolute;
+            top: max(20px, calc(env(safe-area-inset-top) + 14px));
+            left: max(20px, calc(env(safe-area-inset-left) + 14px));
+            z-index: 8;
+            margin: 0;
+            color: rgba(242, 239, 231, 0.78);
+            font-size: 0.9rem;
+            font-variant-numeric: tabular-nums;
+            font-weight: 650;
+            letter-spacing: 0.08em;
+            text-shadow: 0 2px 14px rgba(0, 0, 0, 0.72);
+        }
+
+        .viewer__identity {
+            position: absolute;
+            top: max(18px, calc(env(safe-area-inset-top) + 12px));
+            left: 50%;
+            z-index: 8;
+            margin: 0;
+            color: rgba(242, 239, 231, 0.82);
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(0.98rem, 2vw, 1.2rem);
+            font-weight: 400;
+            letter-spacing: 0.035em;
+            text-shadow: 0 2px 16px rgba(0, 0, 0, 0.72);
+            transform: translateX(-50%);
+            white-space: nowrap;
+        }
+
+        .viewer__close {
+            position: absolute;
+            top: max(14px, calc(env(safe-area-inset-top) + 8px));
+            right: max(14px, calc(env(safe-area-inset-right) + 8px));
+            z-index: 9;
+            display: grid;
+            width: 50px;
+            height: 50px;
+            place-items: center;
+            padding: 0;
+            border: 1px solid rgba(232, 230, 223, 0.2);
+            border-radius: 50%;
+            color: var(--ivory);
+            background: rgba(10, 11, 13, 0.58);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.32);
+            backdrop-filter: blur(16px);
+            cursor: pointer;
+            transition: transform 220ms var(--ease-out), background 220ms ease, border-color 220ms ease;
+        }
+
+        .viewer__close svg {
+            width: 21px;
+            height: 21px;
+            stroke: currentColor;
+            stroke-width: 1.8;
+        }
+
+        .viewer__image-wrap {
+            position: absolute;
+            inset: clamp(76px, 9vh, 104px) clamp(12px, 4vw, 66px) clamp(50px, 7vh, 82px);
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+        }
+
+        .viewer__image {
             width: auto;
             max-width: 100%;
             height: auto;
             max-height: 100%;
             object-fit: contain;
-            border-radius: 10px;
-            box-shadow: 0 20px 54px rgba(0, 0, 0, 0.5);
+            border-radius: clamp(8px, 1.2vw, 14px);
+            box-shadow:
+                0 28px 80px rgba(0, 0, 0, 0.62),
+                0 0 0 1px rgba(255, 255, 255, 0.07);
             opacity: 1;
             transform: translate3d(0, 0, 0) scale(1);
-            transition: opacity 180ms ease, transform 220ms var(--ease), filter 180ms ease;
+            transition: transform 260ms var(--ease-out), opacity 220ms ease, filter 220ms ease;
             will-change: transform, opacity;
+            pointer-events: none;
         }
 
-        .lightbox__image.is-changing {
-            opacity: 0.18;
-            transform: scale(0.985);
-            filter: blur(2px);
-        }
-
-        .lightbox__toolbar {
-            display: grid;
-            grid-template-columns: 1fr auto;
+        .viewer__gesture-hint {
+            position: absolute;
+            left: 50%;
+            bottom: max(22px, calc(env(safe-area-inset-bottom) + 16px));
+            z-index: 8;
+            display: inline-flex;
             align-items: center;
-            gap: 20px;
-            min-height: 74px;
-            padding: 12px 18px;
-            border-top: 1px solid var(--border);
-            background: rgba(31, 32, 34, 0.99);
-        }
-
-        .lightbox__meta {
-            min-width: 0;
-        }
-
-        .lightbox__caption {
-            overflow: hidden;
-            margin: 0;
-            color: var(--text);
-            font-weight: 650;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .lightbox__counter {
-            margin: 2px 0 0;
-            color: var(--text-subtle);
-            font-size: 0.86rem;
-        }
-
-        .desktop-actions {
-            display: flex;
             gap: 10px;
-        }
-
-        .icon-button,
-        .mobile-action {
-            display: inline-grid;
-            flex: 0 0 auto;
-            place-items: center;
-            min-width: 48px;
-            min-height: 48px;
-            padding: 0;
-            border: 1px solid var(--border-strong);
+            max-width: calc(100vw - 32px);
+            padding: 9px 14px;
+            border: 1px solid rgba(232, 230, 223, 0.15);
             border-radius: 999px;
-            color: var(--accent-strong);
-            background: rgba(31, 32, 34, 0.82);
-            cursor: pointer;
-            transition: transform 220ms var(--ease), background 220ms ease, border-color 220ms ease;
+            color: rgba(242, 239, 231, 0.72);
+            background: rgba(10, 11, 13, 0.42);
+            backdrop-filter: blur(14px);
+            font-size: 0.82rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, 8px);
+            transition: opacity 420ms ease, transform 420ms var(--ease-out);
         }
 
-        .icon-button:disabled,
-        .mobile-action:disabled {
-            opacity: 0.38;
-            cursor: not-allowed;
+        .viewer__gesture-hint::before {
+            content: "↔";
+            color: var(--gold-bright);
+            font-size: 1rem;
         }
 
-        .lightbox__close {
+        .viewer__gesture-hint.is-visible {
+            opacity: 1;
+            transform: translate(-50%, 0);
+        }
+
+        .viewer__live-region {
             position: absolute;
-            top: 16px;
-            right: 16px;
-            z-index: 5;
-            color: var(--text);
-            background: rgba(12, 13, 14, 0.84);
         }
 
-        .lightbox__nav {
-            position: absolute;
-            top: 50%;
-            z-index: 4;
-            width: 58px;
-            height: 58px;
-            transform: translateY(-50%);
-            font-size: 1.7rem;
-        }
-
-        .lightbox__prev {
-            left: 16px;
-        }
-
-        .lightbox__next {
-            right: 16px;
-        }
-
-        .mobile-actions {
-            display: none;
-            align-items: center;
-            justify-content: space-between;
-            gap: 10px;
-        }
-
-        .mobile-action {
-            min-width: 54px;
-            min-height: 54px;
-            border-radius: 15px;
-            font-size: 1.3rem;
-        }
-
-        .mobile-action--close {
-            color: var(--danger);
-            border-color: rgba(255, 155, 166, 0.35);
-            background: rgba(115, 34, 45, 0.16);
-        }
-
-        @keyframes loading-sheen {
-            to { transform: translateX(100%); }
-        }
-
-        @keyframes lightbox-in {
-            from {
-                opacity: 0;
-                transform: scale(0.965) translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
+        @keyframes card-sheen {
+            from { transform: translateX(-110%); }
+            to { transform: translateX(110%); }
         }
 
         @media (hover: hover) and (pointer: fine) {
+            .hero__scroll:hover {
+                color: var(--ivory);
+                transform: translateX(-50%) translateY(3px);
+            }
+
             .gallery-card:not(:disabled):hover {
                 z-index: 1;
-                transform: translateY(-6px);
-                border-color: var(--border-strong);
-                box-shadow: 0 20px 42px rgba(0, 0, 0, 0.38);
+                transform: translateY(-7px);
+                border-color: var(--line-strong);
+                box-shadow: 0 28px 68px rgba(0, 0, 0, 0.46);
             }
 
             .gallery-card:not(:disabled):hover .gallery-card__image {
-                transform: scale(1.035);
-                filter: brightness(1.05);
+                transform: scale(1.03);
+                filter: brightness(1.045);
             }
 
-            .gallery-card:not(:disabled):hover .gallery-card__caption::after {
-                transform: translate(2px, -2px);
+            .gallery-card:not(:disabled):hover .gallery-card__media::before {
+                opacity: 0.63;
+                transform: scale(1.17);
             }
 
-            .icon-button:not(:disabled):hover,
-            .mobile-action:not(:disabled):hover {
-                transform: scale(1.06);
-                border-color: rgba(224, 206, 161, 0.72);
-                background: rgba(91, 80, 55, 0.42);
+            .gallery-card:not(:disabled):hover .gallery-card__veil {
+                opacity: 1;
+            }
+
+            .gallery-card:not(:disabled):hover .gallery-card__open-label {
+                transform: translateY(0);
+            }
+
+            .viewer__close:hover {
+                transform: scale(1.07);
+                border-color: rgba(225, 201, 147, 0.5);
+                background: rgba(64, 55, 39, 0.48);
             }
         }
 
@@ -674,93 +910,107 @@
                 display: inline;
             }
 
-            .lightbox {
-                padding: 0;
+            .viewer__stage {
+                cursor: default;
             }
 
-            .lightbox__shell {
-                width: 100vw;
-                height: 100dvh;
-                border: 0;
-                border-radius: 0;
-            }
-
-            .lightbox__stage {
-                padding: max(12px, env(safe-area-inset-top)) 8px 10px;
-            }
-
-            .lightbox__nav,
-            .lightbox__close,
-            .desktop-actions {
+            .viewer__identity {
                 display: none;
             }
 
-            .lightbox__toolbar {
-                grid-template-columns: minmax(0, 1fr) auto;
-                min-height: calc(78px + env(safe-area-inset-bottom));
-                padding: 10px max(12px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left));
-            }
-
-            .mobile-actions {
-                display: flex;
+            .viewer__image-wrap {
+                inset-inline: 6px;
             }
         }
 
-        @media (max-width: 720px) {
-            .page-shell {
-                width: min(calc(100% - 18px), var(--content-width));
-                margin: 9px auto;
-                border-radius: 18px;
+        @media (max-width: 980px) {
+            .gallery {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 680px) {
+            .site {
+                width: min(calc(100% - 14px), var(--page-width));
+                margin: 7px auto;
+                border-radius: 20px;
             }
 
-            .memorial-header {
-                padding-inline: 18px;
+            .hero {
+                min-height: min(780px, calc(100svh - 14px));
+                padding-inline: 11px;
             }
 
-            .main-content {
-                padding-inline: 14px;
+            .monument {
+                width: min(560px, 96vw);
+            }
+
+            .monument__body {
+                min-height: 430px;
+                padding-inline: 52px;
+            }
+
+            .content {
+                padding-inline: 11px;
+            }
+
+            .section-intro {
+                padding-inline: 10px;
             }
 
             .gallery {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 12px;
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
 
             .gallery-card {
-                border-radius: 14px;
-            }
-
-            .gallery-card__media {
-                aspect-ratio: 1 / 1;
-            }
-
-            .gallery-card__caption {
-                min-height: 48px;
-                padding: 10px 11px;
-                font-size: 0.82rem;
-            }
-
-            .memorial-footer {
-                padding-inline: 20px;
-            }
-        }
-
-        @media (max-width: 390px) {
-            .gallery {
-                grid-template-columns: 1fr;
+                border-radius: 17px;
             }
 
             .gallery-card__media {
                 aspect-ratio: 4 / 3;
             }
 
-            .lightbox__toolbar {
-                gap: 8px;
+            .viewer__counter {
+                top: max(21px, calc(env(safe-area-inset-top) + 15px));
+                font-size: 0.84rem;
             }
 
-            .mobile-action {
-                min-width: 48px;
-                min-height: 48px;
+            .viewer__close {
+                width: 48px;
+                height: 48px;
+            }
+
+            .viewer__gesture-hint {
+                font-size: 0.78rem;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .monument__body {
+                padding-inline: 43px;
+            }
+
+            .monument__body::before,
+            .monument__body::after {
+                width: 15px;
+            }
+
+            .monument__body::before {
+                left: 12px;
+            }
+
+            .monument__body::after {
+                right: 12px;
+            }
+
+            .monument__name {
+                font-size: clamp(2.75rem, 16vw, 4rem);
+            }
+
+            .viewer__gesture-hint {
+                white-space: normal;
+                text-align: center;
             }
         }
 
@@ -781,48 +1031,57 @@
 
         @media (prefers-contrast: more) {
             :root {
-                --border: rgba(240, 237, 228, 0.42);
-                --border-strong: rgba(234, 219, 183, 0.8);
-                --text-muted: #e3dfd6;
-                --text-subtle: #cbc7be;
+                --line: rgba(242, 239, 231, 0.38);
+                --line-strong: rgba(225, 201, 147, 0.82);
+                --muted: #e5e1d8;
+                --subtle: #c9c6be;
             }
         }
     </style>
 </head>
 
 <body>
-    <!-- Gestaltung: Anthrazit und dezente Marmoradern, angelehnt an Alpers Grabmal. -->
-    <a class="skip-link" href="#gallery">Direkt zur Galerie</a>
+    <a class="skip-link" href="#gallery">Direkt zu den Erinnerungen</a>
 
-    <div class="page-shell">
-        <header class="memorial-header">
-            <p class="eyebrow">Zum Gedenken an</p>
-            <h1 class="memorial-title">Alper Cinar</h1>
-            <p class="memorial-subtitle">Für immer in unseren Herzen</p>
-            <p class="memorial-dates">Ein Leben voller kostbarer Erinnerungen</p>
+    <div class="site">
+        <header class="hero">
+            <div class="monument" aria-labelledby="memorial-name">
+                <div class="monument__pediment" aria-hidden="true"></div>
+                <div class="monument__body">
+                    <p class="monument__eyebrow">Zum Gedenken an</p>
+                    <h1 class="monument__name" id="memorial-name">Alper Cinar</h1>
+                    <p class="monument__dates">12.12.1966&nbsp;—&nbsp;01.08.2024</p>
+                    <div class="monument__ornament" aria-hidden="true">◆</div>
+                    <p class="monument__message">Für immer in unseren Herzen</p>
+                </div>
+            </div>
+
+            <a class="hero__scroll" href="#memories">Erinnerungen ansehen</a>
         </header>
 
-        <main class="main-content" id="main-content">
-            <section class="intro" aria-labelledby="gallery-heading">
-                <h2 id="gallery-heading" class="visually-hidden">Erinnerungsgalerie</h2>
-                <p class="intro__text">
-                    Diese Galerie bewahrt besondere Erinnerungen an Alper Cinar.
-                    Jedes Bild kann in einer ruhigen, vergrößerten Ansicht betrachtet werden.
+        <main class="content" id="memories">
+            <section class="section-intro" aria-labelledby="gallery-heading">
+                <p class="section-kicker">Was bleibt, sind die Erinnerungen</p>
+                <h2 class="section-title" id="gallery-heading">Momente, die weiterleben</h2>
+                <p class="section-copy">
+                    Diese Galerie bewahrt besondere Augenblicke aus Alpers Leben.
+                    Jedes Bild ist ein Teil seiner Geschichte und unserer gemeinsamen Erinnerung.
                 </p>
                 <p class="interaction-hint">
-                    <span class="hint-pointer">Bild anklicken · Pfeiltasten zum Wechseln · Esc zum Schließen</span>
-                    <span class="hint-touch">Bild antippen · Nach links oder rechts wischen</span>
+                    <span class="hint-pointer">Bild öffnen · zum Wechseln ziehen oder die Pfeiltasten verwenden</span>
+                    <span class="hint-touch">Bild öffnen · zum Wechseln nach links oder rechts wischen</span>
                 </p>
             </section>
 
             <p class="gallery-status" id="gallery-status" role="status" aria-live="polite">
-                Bilder werden geladen …
+                Erinnerungen werden geladen …
             </p>
 
             <section class="gallery" id="gallery" aria-label="Erinnerungsfotos von Alper Cinar"></section>
         </main>
 
-        <footer class="memorial-footer">
+        <footer class="footer">
+            <div class="footer__candle" aria-hidden="true"></div>
             <blockquote>
                 „Die kostbarsten Schätze sind die Erinnerungen, die wir in unseren Herzen tragen.“
             </blockquote>
@@ -830,65 +1089,45 @@
         </footer>
     </div>
 
-    <dialog
-        class="lightbox"
-        id="lightbox"
-        aria-labelledby="lightbox-caption"
-        aria-describedby="lightbox-counter"
-    >
-        <div class="lightbox__shell">
-            <div class="lightbox__stage" id="lightbox-stage">
-                <img class="lightbox__image" id="lightbox-image" alt="">
+    <dialog class="viewer" id="viewer" aria-label="Vergrößerte Bildansicht">
+        <div class="viewer__stage" id="viewer-stage">
+            <img class="viewer__ambient" id="viewer-ambient" alt="" aria-hidden="true" draggable="false">
+            <div class="viewer__shade" aria-hidden="true"></div>
 
-                <button class="icon-button lightbox__close" type="button" data-action="close" aria-label="Bildansicht schließen">
-                    <span aria-hidden="true">×</span>
-                </button>
-
-                <button class="icon-button lightbox__nav lightbox__prev" type="button" data-action="previous" aria-label="Vorheriges Bild">
-                    <span aria-hidden="true">‹</span>
-                </button>
-
-                <button class="icon-button lightbox__nav lightbox__next" type="button" data-action="next" aria-label="Nächstes Bild">
-                    <span aria-hidden="true">›</span>
-                </button>
+            <div class="viewer__progress" aria-hidden="true">
+                <span class="viewer__progress-bar" id="viewer-progress"></span>
             </div>
 
-            <div class="lightbox__toolbar">
-                <div class="lightbox__meta">
-                    <p class="lightbox__caption" id="lightbox-caption">Erinnerung</p>
-                    <p class="lightbox__counter" id="lightbox-counter" aria-live="polite">1 von 22</p>
-                </div>
+            <p class="viewer__counter" id="viewer-counter">1 / 22</p>
+            <p class="viewer__identity">Alper Cinar</p>
 
-                <div class="desktop-actions" aria-label="Bildsteuerung">
-                    <button class="icon-button" type="button" data-action="previous" aria-label="Vorheriges Bild">
-                        <span aria-hidden="true">‹</span>
-                    </button>
-                    <button class="icon-button" type="button" data-action="next" aria-label="Nächstes Bild">
-                        <span aria-hidden="true">›</span>
-                    </button>
-                </div>
+            <button class="viewer__close" id="viewer-close" type="button" aria-label="Bildansicht schließen">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M5 5l14 14M19 5L5 19"></path>
+                </svg>
+            </button>
 
-                <div class="mobile-actions" aria-label="Touch-Steuerung">
-                    <button class="mobile-action" type="button" data-action="previous" aria-label="Vorheriges Bild">
-                        <span aria-hidden="true">‹</span>
-                    </button>
-                    <button class="mobile-action" type="button" data-action="next" aria-label="Nächstes Bild">
-                        <span aria-hidden="true">›</span>
-                    </button>
-                    <button class="mobile-action mobile-action--close" type="button" data-action="close" aria-label="Bildansicht schließen">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
+            <div class="viewer__image-wrap">
+                <img class="viewer__image" id="viewer-image" alt="" draggable="false">
             </div>
+
+            <p class="viewer__gesture-hint" id="viewer-hint">
+                <span class="hint-pointer">Ziehen oder Pfeiltasten verwenden</span>
+                <span class="hint-touch">Nach links oder rechts wischen</span>
+            </p>
+
+            <p class="visually-hidden viewer__live-region" id="viewer-live" aria-live="polite"></p>
         </div>
     </dialog>
 
     <template id="gallery-card-template">
         <button class="gallery-card" type="button" disabled>
             <span class="gallery-card__media">
-                <img class="gallery-card__image" src="" alt="" decoding="async">
+                <img class="gallery-card__image" src="" alt="" decoding="async" draggable="false">
+                <span class="gallery-card__veil" aria-hidden="true">
+                    <span class="gallery-card__open-label">Ansehen</span>
+                </span>
             </span>
-            <span class="gallery-card__caption"></span>
         </button>
     </template>
 
@@ -898,27 +1137,37 @@
 
             const IMAGE_COUNT = 22;
             const IMAGE_PREFIX = 'bild_';
-            const IMAGE_EXTENSION = '.jpg';
+            const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp'];
+
+            /* Hier können später persönliche Bildunterschriften eingetragen werden.
+               Beispiel: 1: 'Familienurlaub 1998' */
+            const CAPTIONS = Object.freeze({});
 
             const gallery = document.getElementById('gallery');
             const galleryStatus = document.getElementById('gallery-status');
-            const cardTemplate = document.getElementById('gallery-card-template');
-            const lightbox = document.getElementById('lightbox');
-            const lightboxStage = document.getElementById('lightbox-stage');
-            const lightboxImage = document.getElementById('lightbox-image');
-            const lightboxCaption = document.getElementById('lightbox-caption');
-            const lightboxCounter = document.getElementById('lightbox-counter');
-            const actionButtons = [...document.querySelectorAll('[data-action]')];
+            const template = document.getElementById('gallery-card-template');
+            const viewer = document.getElementById('viewer');
+            const viewerStage = document.getElementById('viewer-stage');
+            const viewerImage = document.getElementById('viewer-image');
+            const viewerAmbient = document.getElementById('viewer-ambient');
+            const viewerCounter = document.getElementById('viewer-counter');
+            const viewerProgress = document.getElementById('viewer-progress');
+            const viewerClose = document.getElementById('viewer-close');
+            const viewerHint = document.getElementById('viewer-hint');
+            const viewerLive = document.getElementById('viewer-live');
             const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+            const coarsePointer = window.matchMedia('(hover: none), (pointer: coarse)');
 
             const state = {
                 entries: [],
-                currentIndex: 0,
+                currentIndex: -1,
                 loadedCount: 0,
                 failedCount: 0,
                 settledCount: 0,
-                isChanging: false,
+                changing: false,
                 previousFocus: null,
+                hintTimer: 0,
+                wheelLock: false,
                 drag: {
                     active: false,
                     pointerId: null,
@@ -929,44 +1178,65 @@
                 }
             };
 
-            function imageFileName(number) {
-                return `${IMAGE_PREFIX}${String(number).padStart(3, '0')}${IMAGE_EXTENSION}`;
+            function baseFileName(number) {
+                return `${IMAGE_PREFIX}${String(number).padStart(3, '0')}`;
             }
 
-            function imageLabel(number) {
-                return `Erinnerung ${number}`;
+            function captionFor(number) {
+                return CAPTIONS[number] || '';
             }
 
-            function usableEntries() {
-                return state.entries.filter((entry) => entry.status !== 'failed');
+            function loadedEntries() {
+                return state.entries.filter((entry) => entry.status === 'loaded');
+            }
+
+            function cssUrl(url) {
+                return `url("${String(url).replace(/["\\]/g, '\\$&')}")`;
             }
 
             function updateGalleryStatus() {
                 if (state.settledCount < IMAGE_COUNT) {
-                    galleryStatus.textContent = `${state.loadedCount} von ${IMAGE_COUNT} Bildern geladen …`;
+                    galleryStatus.textContent = `${state.loadedCount} von ${IMAGE_COUNT} Erinnerungen geladen …`;
                     return;
                 }
 
                 if (state.loadedCount === 0) {
                     galleryStatus.textContent = 'Es konnten keine Bilder geladen werden.';
-                    gallery.insertAdjacentHTML(
-                        'beforeend',
-                        '<p class="empty-state">Bitte legen Sie die Bilddateien bild_001.jpg bis bild_022.jpg in denselben Ordner wie diese HTML-Datei.</p>'
-                    );
+                    if (!gallery.querySelector('.empty-state')) {
+                        const message = document.createElement('p');
+                        message.className = 'empty-state';
+                        message.textContent = 'Bitte lege die Dateien bild_001.jpg bis bild_022.jpg in denselben Ordner wie diese HTML-Datei.';
+                        gallery.appendChild(message);
+                    }
                     return;
                 }
 
                 if (state.failedCount > 0) {
-                    galleryStatus.textContent = `${state.loadedCount} Bilder verfügbar · ${state.failedCount} Datei${state.failedCount === 1 ? '' : 'en'} nicht gefunden`;
+                    galleryStatus.textContent = `${state.loadedCount} Erinnerungen verfügbar · ${state.failedCount} Datei${state.failedCount === 1 ? '' : 'en'} nicht gefunden`;
                     return;
                 }
 
-                galleryStatus.textContent = `${state.loadedCount} Erinnerungsbilder`;
+                galleryStatus.textContent = `${state.loadedCount} Erinnerungen`;
             }
 
-            function revealCard(card, order) {
-                const delay = reduceMotion.matches ? 0 : Math.min(order * 55, 500);
+            function revealCard(card, index) {
+                const delay = reduceMotion.matches ? 0 : Math.min(index * 55, 520);
                 window.setTimeout(() => card.classList.add('is-visible'), delay);
+            }
+
+            function tryNextSource(entry) {
+                if (entry.extensionIndex >= IMAGE_EXTENSIONS.length) {
+                    entry.status = 'failed';
+                    entry.card.hidden = true;
+                    state.failedCount += 1;
+                    state.settledCount += 1;
+                    updateGalleryStatus();
+                    return;
+                }
+
+                const source = `${baseFileName(entry.number)}${IMAGE_EXTENSIONS[entry.extensionIndex]}`;
+                entry.pendingSource = source;
+                entry.image.src = source;
             }
 
             function createGallery() {
@@ -974,203 +1244,226 @@
 
                 for (let index = 0; index < IMAGE_COUNT; index += 1) {
                     const number = index + 1;
-                    const fileName = imageFileName(number);
-                    const card = cardTemplate.content.firstElementChild.cloneNode(true);
+                    const card = template.content.firstElementChild.cloneNode(true);
                     const image = card.querySelector('.gallery-card__image');
-                    const caption = card.querySelector('.gallery-card__caption');
+                    const caption = captionFor(number);
 
                     const entry = {
                         number,
-                        fileName,
-                        label: imageLabel(number),
+                        caption,
                         status: 'pending',
+                        extensionIndex: 0,
+                        pendingSource: '',
+                        source: '',
                         card,
                         image
                     };
 
                     card.dataset.index = String(index);
-                    card.setAttribute('aria-label', `${entry.label} vergrößert öffnen`);
-                    caption.textContent = entry.label;
-
-                    image.alt = `Erinnerungsfoto ${number} von Alper Cinar`;
+                    card.setAttribute('aria-label', caption ? `${caption} vergrößert öffnen` : `Erinnerungsfoto ${number} vergrößert öffnen`);
+                    image.alt = caption || `Erinnerungsfoto ${number} von Alper Cinar`;
                     image.loading = number <= 6 ? 'eager' : 'lazy';
-                    if (number === 1) {
-                        image.fetchPriority = 'high';
-                    }
+                    if (number === 1) image.fetchPriority = 'high';
 
                     image.addEventListener('load', () => {
                         if (entry.status !== 'pending') return;
+
                         entry.status = 'loaded';
+                        entry.source = entry.pendingSource;
                         state.loadedCount += 1;
                         state.settledCount += 1;
                         card.disabled = false;
                         card.classList.add('is-loaded');
+                        card.style.setProperty('--photo', cssUrl(entry.source));
                         updateGalleryStatus();
-                    }, { once: true });
+                    });
 
                     image.addEventListener('error', () => {
                         if (entry.status !== 'pending') return;
-                        entry.status = 'failed';
-                        state.failedCount += 1;
-                        state.settledCount += 1;
-                        card.hidden = true;
-                        updateGalleryStatus();
-                    }, { once: true });
+                        entry.extensionIndex += 1;
+                        tryNextSource(entry);
+                    });
 
-                    card.addEventListener('click', () => openLightbox(index));
-                    image.src = fileName;
-
+                    card.addEventListener('click', () => openViewer(index));
                     state.entries.push(entry);
                     fragment.appendChild(card);
                     revealCard(card, index);
+                    tryNextSource(entry);
                 }
 
                 gallery.appendChild(fragment);
             }
 
-            function getNextUsableIndex(startIndex, direction) {
+            function findLoadedIndex(startIndex, direction) {
                 if (!state.entries.length) return -1;
 
                 for (let step = 1; step <= state.entries.length; step += 1) {
                     const candidate = (startIndex + direction * step + state.entries.length) % state.entries.length;
-                    if (state.entries[candidate].status !== 'failed') {
-                        return candidate;
-                    }
+                    if (state.entries[candidate].status === 'loaded') return candidate;
                 }
 
                 return -1;
             }
 
-            function getVisiblePosition(index) {
-                const entries = usableEntries();
-                const currentEntry = state.entries[index];
-                return entries.findIndex((entry) => entry === currentEntry) + 1;
+            function visiblePosition(index) {
+                const available = loadedEntries();
+                const entry = state.entries[index];
+                return available.findIndex((candidate) => candidate === entry) + 1;
             }
 
-            function setNavigationState() {
-                const disableNavigation = usableEntries().length <= 1;
-                actionButtons
-                    .filter((button) => button.dataset.action === 'previous' || button.dataset.action === 'next')
-                    .forEach((button) => {
-                        button.disabled = disableNavigation;
-                    });
-            }
-
-            function renderCurrentImage() {
+            function renderViewer(announce = true) {
                 const entry = state.entries[state.currentIndex];
-                if (!entry || entry.status === 'failed') return;
+                const available = loadedEntries();
+                if (!entry || entry.status !== 'loaded' || !available.length) return;
 
-                lightboxImage.src = entry.fileName;
-                lightboxImage.alt = `Vergrößertes Erinnerungsfoto ${entry.number} von Alper Cinar`;
-                lightboxCaption.textContent = entry.label;
-                lightboxCounter.textContent = `${getVisiblePosition(state.currentIndex)} von ${usableEntries().length}`;
-                setNavigationState();
-                preloadAdjacentImages();
+                viewerImage.src = entry.source;
+                viewerAmbient.src = entry.source;
+                viewerImage.alt = entry.caption || `Vergrößertes Erinnerungsfoto ${entry.number} von Alper Cinar`;
+
+                const position = visiblePosition(state.currentIndex);
+                viewerCounter.textContent = `${position} / ${available.length}`;
+                viewerProgress.style.width = `${(position / available.length) * 100}%`;
+
+                if (announce) {
+                    viewerLive.textContent = entry.caption
+                        ? `${entry.caption}, Bild ${position} von ${available.length}`
+                        : `Erinnerungsfoto ${position} von ${available.length}`;
+                }
+
+                preloadNeighbors();
             }
 
-            function preloadAdjacentImages() {
+            function preloadNeighbors() {
                 [-1, 1].forEach((direction) => {
-                    const index = getNextUsableIndex(state.currentIndex, direction);
+                    const index = findLoadedIndex(state.currentIndex, direction);
                     if (index >= 0) {
-                        const preloader = new Image();
-                        preloader.src = state.entries[index].fileName;
+                        const preload = new Image();
+                        preload.src = state.entries[index].source;
                     }
                 });
             }
 
-            function openLightbox(index) {
+            function showGestureHint() {
+                window.clearTimeout(state.hintTimer);
+                viewerHint.classList.add('is-visible');
+                state.hintTimer = window.setTimeout(() => {
+                    viewerHint.classList.remove('is-visible');
+                }, 2700);
+            }
+
+            function openViewer(index) {
                 const entry = state.entries[index];
                 if (!entry || entry.status !== 'loaded') return;
 
                 state.currentIndex = index;
                 state.previousFocus = document.activeElement;
-                renderCurrentImage();
+                renderViewer(false);
+                document.body.classList.add('viewer-open');
 
-                if (typeof lightbox.showModal === 'function') {
-                    lightbox.showModal();
+                if (typeof viewer.showModal === 'function') {
+                    if (!viewer.open) viewer.showModal();
                 } else {
-                    lightbox.setAttribute('open', '');
+                    viewer.setAttribute('open', '');
                 }
-            }
 
-            function closeLightbox() {
-                resetDrag();
-
-                if (typeof lightbox.close === 'function' && lightbox.open) {
-                    lightbox.close();
-                } else {
-                    lightbox.removeAttribute('open');
-                    restoreFocus();
-                }
+                viewerClose.focus({ preventScroll: true });
+                showGestureHint();
             }
 
             function restoreFocus() {
+                document.body.classList.remove('viewer-open');
+                window.clearTimeout(state.hintTimer);
+                viewerHint.classList.remove('is-visible');
+                resetDrag();
+
                 if (state.previousFocus instanceof HTMLElement) {
                     state.previousFocus.focus({ preventScroll: true });
                 }
                 state.previousFocus = null;
             }
 
-            function changeImage(direction) {
-                if (state.isChanging || usableEntries().length <= 1) return;
+            function closeViewer() {
+                if (typeof viewer.close === 'function' && viewer.open) {
+                    viewer.close();
+                } else {
+                    viewer.removeAttribute('open');
+                    restoreFocus();
+                }
+            }
 
-                const nextIndex = getNextUsableIndex(state.currentIndex, direction);
-                if (nextIndex < 0 || nextIndex === state.currentIndex) return;
+            function animateTo(direction, nextIndex) {
+                const travel = Math.min(88, Math.max(44, window.innerWidth * 0.055));
+                const exitX = direction > 0 ? -travel : travel;
+                const enterX = -exitX;
+                const duration = reduceMotion.matches ? 0 : 190;
 
-                state.isChanging = true;
-                lightboxImage.classList.add('is-changing');
+                state.changing = true;
+                viewerImage.style.transition = duration ? `transform ${duration}ms var(--ease-out), opacity ${duration}ms ease, filter ${duration}ms ease` : 'none';
+                viewerImage.style.transform = `translate3d(${exitX}px, 0, 0) scale(0.985)`;
+                viewerImage.style.opacity = '0';
+                viewerImage.style.filter = 'blur(2px)';
+                viewerAmbient.style.opacity = '0.18';
 
-                const delay = reduceMotion.matches ? 0 : 130;
                 window.setTimeout(() => {
                     state.currentIndex = nextIndex;
-                    renderCurrentImage();
-                    resetDrag();
-                    lightboxImage.classList.remove('is-changing');
+                    renderViewer();
+                    viewerImage.style.transition = 'none';
+                    viewerImage.style.transform = `translate3d(${enterX}px, 0, 0) scale(0.985)`;
+                    viewerImage.style.opacity = '0';
+                    viewerImage.style.filter = 'blur(2px)';
 
-                    window.setTimeout(() => {
-                        state.isChanging = false;
-                    }, reduceMotion.matches ? 0 : 190);
-                }, delay);
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            viewerImage.style.transition = duration ? `transform ${duration + 70}ms var(--ease-out), opacity ${duration + 30}ms ease, filter ${duration + 30}ms ease` : 'none';
+                            viewerImage.style.transform = 'translate3d(0, 0, 0) scale(1)';
+                            viewerImage.style.opacity = '1';
+                            viewerImage.style.filter = 'blur(0)';
+                            viewerAmbient.style.opacity = '0.5';
+
+                            window.setTimeout(() => {
+                                viewerImage.style.removeProperty('transition');
+                                viewerImage.style.removeProperty('transform');
+                                viewerImage.style.removeProperty('opacity');
+                                viewerImage.style.removeProperty('filter');
+                                viewerAmbient.style.removeProperty('opacity');
+                                state.changing = false;
+                            }, duration + 90);
+                        });
+                    });
+                }, duration);
             }
 
-            function markCurrentImageAsFailed() {
-                const entry = state.entries[state.currentIndex];
-                if (!entry || entry.status === 'failed') return;
-
-                const previousStatus = entry.status;
-                entry.status = 'failed';
-                entry.card.hidden = true;
-                state.failedCount += 1;
-
-                if (previousStatus === 'loaded' && state.loadedCount > 0) {
-                    state.loadedCount -= 1;
-                } else if (previousStatus === 'pending') {
-                    state.settledCount += 1;
-                }
-                updateGalleryStatus();
-
-                const nextIndex = getNextUsableIndex(state.currentIndex, 1);
-                if (nextIndex < 0) {
-                    closeLightbox();
-                    return;
-                }
-
-                state.currentIndex = nextIndex;
-                renderCurrentImage();
+            function navigate(direction) {
+                if (state.changing || loadedEntries().length <= 1) return;
+                const nextIndex = findLoadedIndex(state.currentIndex, direction);
+                if (nextIndex < 0 || nextIndex === state.currentIndex) return;
+                animateTo(direction, nextIndex);
             }
 
-            function resetDrag() {
+            function resetDrag(animateBack = false) {
                 state.drag.active = false;
                 state.drag.pointerId = null;
                 state.drag.deltaX = 0;
                 state.drag.horizontal = false;
-                lightboxImage.style.removeProperty('transform');
-                lightboxImage.style.removeProperty('opacity');
-                lightboxImage.style.removeProperty('transition');
+                viewerStage.classList.remove('is-dragging');
+
+                viewerImage.style.transition = animateBack && !reduceMotion.matches
+                    ? 'transform 260ms var(--ease-out), opacity 220ms ease'
+                    : '';
+                viewerImage.style.removeProperty('transform');
+                viewerImage.style.removeProperty('opacity');
+
+                if (animateBack && !reduceMotion.matches) {
+                    window.setTimeout(() => viewerImage.style.removeProperty('transition'), 280);
+                } else {
+                    viewerImage.style.removeProperty('transition');
+                }
             }
 
             function startDrag(event) {
-                if (event.pointerType === 'mouse' || usableEntries().length <= 1) return;
+                if (state.changing || loadedEntries().length <= 1) return;
+                if (event.target instanceof Element && event.target.closest('button, a')) return;
+                if (event.pointerType === 'mouse' && event.button !== 0) return;
 
                 state.drag.active = true;
                 state.drag.pointerId = event.pointerId;
@@ -1178,9 +1471,9 @@
                 state.drag.startY = event.clientY;
                 state.drag.deltaX = 0;
                 state.drag.horizontal = false;
-
-                lightboxStage.setPointerCapture?.(event.pointerId);
-                lightboxImage.style.transition = 'none';
+                viewerStage.classList.add('is-dragging');
+                viewerStage.setPointerCapture?.(event.pointerId);
+                viewerImage.style.transition = 'none';
             }
 
             function moveDrag(event) {
@@ -1190,98 +1483,121 @@
                 const deltaY = event.clientY - state.drag.startY;
 
                 if (!state.drag.horizontal) {
-                    if (Math.abs(deltaX) < 12) return;
-                    if (Math.abs(deltaY) > Math.abs(deltaX)) {
-                        resetDrag();
+                    if (Math.abs(deltaX) < 10) return;
+                    if (Math.abs(deltaY) > Math.abs(deltaX) * 1.05) {
+                        resetDrag(false);
                         return;
                     }
                     state.drag.horizontal = true;
                 }
 
+                if (event.cancelable) event.preventDefault();
                 state.drag.deltaX = deltaX;
-                const stageWidth = Math.max(lightboxStage.clientWidth, 1);
-                const progress = Math.min(Math.abs(deltaX) / stageWidth, 0.55);
-                const translated = deltaX * 0.72;
-                const scale = 1 - progress * 0.08;
 
-                lightboxImage.style.transform = `translate3d(${translated}px, 0, 0) scale(${scale})`;
-                lightboxImage.style.opacity = String(1 - progress * 0.48);
+                const width = Math.max(viewerStage.clientWidth, 1);
+                const progress = Math.min(Math.abs(deltaX) / width, 0.62);
+                const resistance = 0.78 - progress * 0.18;
+                const translated = deltaX * resistance;
+                const scale = 1 - progress * 0.055;
+
+                viewerImage.style.transform = `translate3d(${translated}px, 0, 0) scale(${scale})`;
+                viewerImage.style.opacity = String(1 - progress * 0.42);
             }
 
             function endDrag(event) {
                 if (!state.drag.active || event.pointerId !== state.drag.pointerId) return;
 
-                const threshold = Math.min(110, Math.max(58, lightboxStage.clientWidth * 0.13));
+                const threshold = Math.min(120, Math.max(54, viewerStage.clientWidth * 0.105));
                 const deltaX = state.drag.deltaX;
+                const shouldNavigate = state.drag.horizontal && Math.abs(deltaX) >= threshold;
+                const direction = deltaX < 0 ? 1 : -1;
 
-                lightboxImage.style.transition = '';
-
-                if (state.drag.horizontal && Math.abs(deltaX) >= threshold) {
-                    const direction = deltaX < 0 ? 1 : -1;
-                    resetDrag();
-                    changeImage(direction);
-                    return;
-                }
-
-                resetDrag();
+                resetDrag(!shouldNavigate);
+                if (shouldNavigate) navigate(direction);
             }
 
-            function handleAction(action) {
-                if (action === 'close') closeLightbox();
-                if (action === 'previous') changeImage(-1);
-                if (action === 'next') changeImage(1);
-            }
+            function handleWheel(event) {
+                if (!viewer.open || state.wheelLock || state.changing || loadedEntries().length <= 1) return;
 
-            actionButtons.forEach((button) => {
-                button.addEventListener('click', () => handleAction(button.dataset.action));
-            });
+                const horizontal = Math.abs(event.deltaX) > Math.abs(event.deltaY) * 1.2;
+                if (!horizontal || Math.abs(event.deltaX) < 28) return;
 
-            lightbox.addEventListener('cancel', (event) => {
                 event.preventDefault();
-                closeLightbox();
+                state.wheelLock = true;
+                navigate(event.deltaX > 0 ? 1 : -1);
+                window.setTimeout(() => {
+                    state.wheelLock = false;
+                }, 520);
+            }
+
+            viewerClose.addEventListener('click', closeViewer);
+
+            viewer.addEventListener('cancel', (event) => {
+                event.preventDefault();
+                closeViewer();
             });
 
-            lightbox.addEventListener('close', restoreFocus);
+            viewer.addEventListener('close', restoreFocus);
 
-            lightbox.addEventListener('click', (event) => {
-                if (event.target === lightbox) closeLightbox();
+            viewer.addEventListener('click', (event) => {
+                if (event.target === viewer) closeViewer();
             });
 
-            lightbox.addEventListener('keydown', (event) => {
+            viewer.addEventListener('keydown', (event) => {
                 if (event.key === 'ArrowLeft') {
                     event.preventDefault();
-                    changeImage(-1);
+                    navigate(-1);
                 } else if (event.key === 'ArrowRight') {
                     event.preventDefault();
-                    changeImage(1);
+                    navigate(1);
                 } else if (event.key === 'Home') {
                     event.preventDefault();
-                    const firstIndex = state.entries.findIndex((entry) => entry.status !== 'failed');
-                    if (firstIndex >= 0) {
-                        state.currentIndex = firstIndex;
-                        renderCurrentImage();
-                    }
+                    const first = state.entries.findIndex((entry) => entry.status === 'loaded');
+                    if (first >= 0 && first !== state.currentIndex) animateTo(-1, first);
                 } else if (event.key === 'End') {
                     event.preventDefault();
-                    let lastIndex = -1;
+                    let last = -1;
                     for (let index = state.entries.length - 1; index >= 0; index -= 1) {
-                        if (state.entries[index].status !== 'failed') {
-                            lastIndex = index;
+                        if (state.entries[index].status === 'loaded') {
+                            last = index;
                             break;
                         }
                     }
-                    if (lastIndex >= 0) {
-                        state.currentIndex = lastIndex;
-                        renderCurrentImage();
-                    }
+                    if (last >= 0 && last !== state.currentIndex) animateTo(1, last);
                 }
             });
 
-            lightboxImage.addEventListener('error', markCurrentImageAsFailed);
-            lightboxStage.addEventListener('pointerdown', startDrag);
-            lightboxStage.addEventListener('pointermove', moveDrag);
-            lightboxStage.addEventListener('pointerup', endDrag);
-            lightboxStage.addEventListener('pointercancel', resetDrag);
+            viewerImage.addEventListener('error', () => {
+                const entry = state.entries[state.currentIndex];
+                if (!entry || entry.status !== 'loaded') return;
+
+                entry.status = 'failed';
+                entry.card.hidden = true;
+                state.loadedCount = Math.max(0, state.loadedCount - 1);
+                state.failedCount += 1;
+                updateGalleryStatus();
+
+                const next = findLoadedIndex(state.currentIndex, 1);
+                if (next < 0) {
+                    closeViewer();
+                } else {
+                    state.currentIndex = next;
+                    renderViewer();
+                }
+            });
+
+            viewerStage.addEventListener('pointerdown', startDrag);
+            viewerStage.addEventListener('pointermove', moveDrag, { passive: false });
+            viewerStage.addEventListener('pointerup', endDrag);
+            viewerStage.addEventListener('pointercancel', () => resetDrag(true));
+            viewerStage.addEventListener('lostpointercapture', () => {
+                if (state.drag.active) resetDrag(true);
+            });
+            viewerStage.addEventListener('wheel', handleWheel, { passive: false });
+
+            coarsePointer.addEventListener?.('change', () => {
+                if (viewer.open) showGestureHint();
+            });
 
             createGallery();
         })();

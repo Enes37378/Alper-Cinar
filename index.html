@@ -1038,6 +1038,267 @@
             }
         }
 
+
+
+        /* Mobile-first Feinschliff für den QR-Code-Aufruf am Grab */
+        @media (max-width: 680px) {
+            html {
+                scroll-padding-top: 0;
+            }
+
+            body {
+                background: #090a0c;
+            }
+
+            body::before,
+            body::after {
+                display: none;
+            }
+
+            .site {
+                width: 100%;
+                margin: 0;
+                border: 0;
+                border-radius: 0;
+                box-shadow: none;
+                background: #17191c;
+            }
+
+            .hero {
+                min-height: 100svh;
+                min-height: 100dvh;
+                padding: max(28px, env(safe-area-inset-top)) 14px max(76px, calc(env(safe-area-inset-bottom) + 62px));
+                align-content: center;
+                background:
+                    radial-gradient(ellipse at 50% 22%, rgba(255,255,255,.07), transparent 42%),
+                    linear-gradient(155deg, #282b30 0%, #17191c 54%, #0d0f11 100%);
+            }
+
+            .hero::before {
+                inset: -10%;
+                opacity: .38;
+                transform: none;
+                background-size: 620px 460px, 760px 560px;
+            }
+
+            .hero::after {
+                background:
+                    linear-gradient(180deg, rgba(0,0,0,.08), transparent 20%, transparent 72%, rgba(0,0,0,.58)),
+                    radial-gradient(ellipse at 50% 50%, transparent 0 42%, rgba(0,0,0,.18) 100%);
+            }
+
+            .monument {
+                width: min(92vw, 520px);
+                padding-top: clamp(42px, 11vw, 62px);
+                filter: drop-shadow(0 22px 32px rgba(0,0,0,.35));
+            }
+
+            .monument__pediment {
+                width: 88%;
+                height: clamp(62px, 17vw, 94px);
+            }
+
+            .monument__body {
+                min-height: 0;
+                padding: clamp(46px, 11vw, 62px) clamp(42px, 11vw, 62px) clamp(44px, 10vw, 56px);
+                border-radius: 3px 3px 16px 16px;
+                box-shadow:
+                    0 22px 44px rgba(0,0,0,.38),
+                    0 0 0 6px rgba(6,7,8,.18) inset,
+                    0 1px 0 rgba(255,255,255,.12) inset;
+            }
+
+            .monument__body::before,
+            .monument__body::after {
+                top: 20px;
+                bottom: 20px;
+                width: 14px;
+            }
+
+            .monument__body::before { left: 12px; }
+            .monument__body::after { right: 12px; }
+
+            .monument__eyebrow {
+                margin-bottom: 10px;
+                font-size: clamp(.66rem, 2.6vw, .76rem);
+                letter-spacing: .17em;
+            }
+
+            .monument__name {
+                font-size: clamp(3rem, 14.5vw, 4.8rem);
+                line-height: .98;
+            }
+
+            .monument__dates {
+                margin-top: 16px;
+                font-size: clamp(.9rem, 3.6vw, 1rem);
+                letter-spacing: .035em;
+            }
+
+            .monument__ornament {
+                width: min(320px, 84%);
+                margin-top: 25px;
+                gap: 11px;
+            }
+
+            .monument__message {
+                margin-top: 18px;
+                font-size: clamp(1.05rem, 4.8vw, 1.28rem);
+                line-height: 1.35;
+            }
+
+            .hero__scroll {
+                bottom: max(22px, calc(env(safe-area-inset-bottom) + 14px));
+                gap: 12px;
+                font-size: .75rem;
+                letter-spacing: .085em;
+            }
+
+            .content {
+                padding: 48px 14px 72px;
+                background: linear-gradient(180deg, #25282d 0%, #1a1c20 100%);
+            }
+
+            .section-intro {
+                margin-bottom: 30px;
+                padding: 0 4px;
+            }
+
+            .section-kicker {
+                margin-bottom: 10px;
+                font-size: .69rem;
+                letter-spacing: .16em;
+                line-height: 1.45;
+            }
+
+            .section-title {
+                font-size: clamp(2rem, 10.4vw, 3rem);
+                line-height: 1.02;
+                letter-spacing: -.03em;
+            }
+
+            .section-copy {
+                max-width: 34rem;
+                margin-top: 18px;
+                font-size: .98rem;
+                line-height: 1.65;
+            }
+
+            .interaction-hint {
+                width: 100%;
+                min-height: 0;
+                margin-top: 20px;
+                padding: 11px 13px;
+                justify-content: center;
+                border-radius: 16px;
+                font-size: .82rem;
+                line-height: 1.45;
+                text-align: center;
+            }
+
+            .gallery-status {
+                min-height: 0;
+                margin: 0 0 16px;
+                font-size: .8rem;
+            }
+
+            .gallery {
+                gap: 14px;
+            }
+
+            .gallery-card,
+            .gallery-card__media {
+                border-radius: 16px;
+            }
+
+            .gallery-card {
+                box-shadow: 0 14px 34px rgba(0,0,0,.28);
+                transform: none;
+                transition: opacity 240ms ease, border-color 180ms ease;
+            }
+
+            .gallery-card__media {
+                aspect-ratio: 4 / 3;
+            }
+
+            .gallery-card--portrait .gallery-card__media {
+                aspect-ratio: 4 / 5;
+            }
+
+            .gallery-card--square .gallery-card__media {
+                aspect-ratio: 1 / 1;
+            }
+
+            .gallery-card__image {
+                transform: none;
+                transition: opacity 200ms ease;
+            }
+
+            .gallery-card__media::before,
+            .gallery-card__veil {
+                display: none;
+            }
+
+            .footer {
+                padding: 52px 20px max(58px, calc(env(safe-area-inset-bottom) + 34px));
+            }
+
+            .footer blockquote {
+                font-size: 1.08rem;
+                line-height: 1.55;
+            }
+
+            .viewer__image-wrap {
+                inset: max(70px, calc(env(safe-area-inset-top) + 58px)) 0 max(44px, calc(env(safe-area-inset-bottom) + 34px));
+                padding: 0 4px;
+            }
+
+            .viewer__image {
+                max-width: calc(100vw - 8px);
+                max-height: 100%;
+                border-radius: 7px;
+                box-shadow: 0 18px 52px rgba(0,0,0,.58);
+            }
+
+            .viewer__counter {
+                left: max(14px, calc(env(safe-area-inset-left) + 10px));
+            }
+
+            .viewer__close {
+                right: max(12px, calc(env(safe-area-inset-right) + 8px));
+                width: 46px;
+                height: 46px;
+            }
+
+            .viewer__gesture-hint {
+                bottom: max(14px, calc(env(safe-area-inset-bottom) + 8px));
+                padding: 7px 11px;
+                font-size: .74rem;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .hero {
+                padding-inline: 10px;
+            }
+
+            .monument {
+                width: 95vw;
+            }
+
+            .monument__body {
+                padding-inline: 38px;
+            }
+
+            .monument__name {
+                font-size: clamp(2.72rem, 14.2vw, 4rem);
+            }
+
+            .section-title {
+                font-size: clamp(1.92rem, 10vw, 2.5rem);
+            }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             html {
                 scroll-behavior: auto;
